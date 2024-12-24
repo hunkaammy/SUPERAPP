@@ -3,14 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your PWA</title>
-    <link rel="manifest" href="manifest.json">
-    <link rel="stylesheet" href="styles.css">
+    <title>Professional Buttons Example</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        .button {
+            display: flex;
+            align-items: center;
+            padding: 12px 25px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            margin: 10px 0;
+            width: 200px; /* Fixed width for uniformity */
+            transition: background-color 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adding shadow for depth */
+        }
+        .button:hover {
+            background-color: #45a049;
+            transform: translateY(-2px); /* Slight lift effect on hover */
+        }
+        .button i {
+            margin-right: 10px; /* Space between icon and text */
+        }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center buttons */
+        }
+    </style>
 </head>
 <body>
-    <h1>Hello, PWA!</h1>
-    <p>This is a simple Progressive Web App.</p>
-    <button id="install-button" style="display: none;">Install App</button>
-    <script src="app.js"></script>
+
+    <div class="button-container">
+        <button class="button" id="googleButton">
+            <i class="fab fa-google"></i>
+            Go to Google
+        </button>
+        <button class="button" id="youtubeButton">
+            <i class="fab fa-youtube"></i>
+            Visit YouTube
+        </button>
+        <button class="button" id="githubButton">
+            <i class="fab fa-github"></i>
+            Explore GitHub
+        </button>
+        <button class="button" id="twitterButton">
+            <i class="fab fa-twitter"></i>
+            Check Twitter
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('googleButton').onclick = function() {
+            window.location.href = 'https://www.google.com';
+        };
+        document.getElementById('youtubeButton').onclick = function() {
+            window.location.href = 'https://www.youtube.com';
+        };
+        document.getElementById('githubButton').onclick = function() {
+            window.location.href = 'https://www.github.com';
+        };
+        document.getElementById('twitterButton').onclick = function() {
+            window.location.href = 'https://www.twitter.com';
+        };
+    </script>
+
 </body>
 </html>
