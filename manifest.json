@@ -1,6 +1,6 @@
 {
 	"name": "Progressive Web App",
-	"short_name": "Demo PWA",
+	"short_name": "SUPER APP",
 	"description": "Demo for progressive web app with push notifications, background sync etc.",
 	"start_url": "./index.html?utm=homescreen",
 	"display": "standalone",
