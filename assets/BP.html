@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        form {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label {
+            display: block; 
+            margin: 5px 0; 
+        }
+        input[type="number"], input[type="date"], input[type="time"] {
+            width: calc(100% - 20px); /* Full width minus padding */
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 8px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .delete-button {
+            background-color: #dc3545;
+        }
+        .delete-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="header">Health Tracker</h1>
+
+    <h2 class="section-title">Add Blood Pressure</h2>
+    <form id="bpForm" class="data-form">
+        <label for="bpSystolic">Systolic BP (mmHg):</label>
+        <input type="number" id="bpSystolic" class="form-input" required>
+
+        <label for="bpDiastolic">Diastolic BP (mmHg):</label>
+        <input type="number" id="bpDiastolic" class="form-input" required>
+
+        <label for="bpDate">Date:</label>
+        <input type="date" id="bpDate" class="form-input" required>
+
+        <label for="bpTime">Time:</label>
+        <input type="time" id="bpTime" class="form-input" required>
+
+        <button type="submit" class="submit-button">Add BP Record</button>
+    </form>
+
+    <h2 class="section-title">Add Glucose Level</h2>
+    <form id="glucoseForm" class="data-form">
+        <label for="glucose">Glucose Level (mg/dL):</label>
+        <input type="number" id="glucose" class="form-input" required>
+
+        <label for="glucoseDate">Date:</label>
+        <input type="date" id="glucoseDate" class="form-input" required>
+
+        <label for="glucoseTime">Time:</label>
+        <input type="time" id="glucoseTime" class="form-input" required>
+
+        <button type="submit" class="submit-button">Add Glucose Record</button>
+    </form>
+
+    <h2 class="section-title">Records</h2>
+    <table id="recordsTable">
+        <thead>
+            <tr>
+                <th>Timestamp</th>
+                <th>Blood Pressure (S/D)</th>
+                <th>Glucose (mg/dL)</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="recordsBody" class="records-body"></tbody>
+    </table>
+
+    <!-- Backup and Restore Buttons -->
+    <button id="backupButton" class="submit-button">Backup</button>
+    <input type="file" id="restoreInput" style="display: none;" />
+    <button id="restoreButton" class="submit-button">Restore</button>
+
+    <script> document.addEventListener("DOMContentLoaded", () => {
+    const bpForm = document.getElementById("bpForm");
+    const glucoseForm = document.getElementById("glucoseForm");
+    const recordsBody = document.getElementById("recordsBody");
+    const backupButton = document.getElementById("backupButton");
+    const restoreInput = document.getElementById("restoreInput");
+    const restoreButton = document.getElementById("restoreButton");
+
+    // Load existing records from localStorage
+    loadRecords();
+
+    bpForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const bpSystolic = document.getElementById("bpSystolic").value;
+        const bpDiastolic = document.getElementById("bpDiastolic").value;
+        const bpDate = document.getElementById("bpDate").value;
+        const bpTime = document.getElementById("bpTime").value;
+
+        // Check if all fields are filled out
+        if (!bpSystolic || !bpDiastolic || !bpDate || !bpTime) {
+            alert("Please fill out all fields for Blood Pressure.");
+            return;
+        }
+
+        // Format date to DD/MM/YY
+        const dateParts = bpDate.split("-");
+        const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0].slice(-2)}`;
+        const formattedTime = bpTime;
+
+        const timestamp = `${formattedDate} ${formattedTime}`;
+
+        const bpRecord = {
+            timestamp: timestamp,
+            bloodPressure: `${bpSystolic}/${bpDiastolic}`,
+            glucose: ""  // Keep glucose empty
+        };
+
+        // Save BP record to localStorage
+        saveRecord(bpRecord);
+        addRecordToTable(bpRecord);
+        bpForm.reset();
+    });
+
+    glucoseForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const glucose = document.getElementById("glucose").value;
+        const glucoseDate = document.getElementById("glucoseDate").value;
+        const glucoseTime = document.getElementById("glucoseTime").value;
+
+        // Check if all fields are filled out
+        if (!glucose || !glucoseDate || !glucoseTime) {
+            alert("Please fill out all fields for Glucose Level.");
+            return;
+        }
+
+        // Format date to DD/MM/YY
+        const dateParts = glucoseDate.split("-");
+        const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0].slice(-2)}`;
+        const formattedTime = glucoseTime;
+
+        const timestamp = `${formattedDate} ${formattedTime}`;
+
+        const glucoseRecord = {
+            timestamp: timestamp,
+            bloodPressure: "",  // Keep blood pressure empty
+            glucose: glucose
+        };
+
+        // Save glucose record to localStorage
+        saveRecord(glucoseRecord);
+        addRecordToTable(glucoseRecord);
+        glucoseForm.reset();
+    });
+
+    // Backup functionality
+    backupButton.addEventListener("click", () => {
+        const records = localStorage.getItem("healthRecords");
+        if (records) {
+            const blob = new Blob([records], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'healthRecords.json';
+            a.click();
+            URL.revokeObjectURL(url);  // Clean up
+        } else {
+            alert("No records to backup.");
+        }
+    });
+
+    // Restore functionality
+    restoreButton.addEventListener("click", () => {
+        restoreInput.click();  // Trigger the file input
+    });
+
+    restoreInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const records = JSON.parse(e.target.result);
+                    localStorage.setItem("healthRecords", JSON.stringify(records));
+                    reloadRecords();
+                    alert('Records restored successfully!');
+                } catch (error) {
+                    alert('Failed to restore records. Make sure the file is valid JSON.');
+                }
+            };
+            reader.readAsText(file);
+        }
+    });
+
+    function saveRecord(record) {
+        const records = JSON.parse(localStorage.getItem("healthRecords")) || [];
+        records.push(record);
+        localStorage.setItem("healthRecords", JSON.stringify(records));
+    }
+
+    function loadRecords() {
+        const records = JSON.parse(localStorage.getItem("healthRecords")) || [];
+        records.forEach(addRecordToTable);
+    }
+
+    function addRecordToTable(record) {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${record.timestamp}</td>
+            <td>${record.bloodPressure}</td>
+            <td>${record.glucose}</td>
+            <td>
+                <button class="delete-button" onclick="deleteRecord('${record.timestamp}')">Delete</button>
+            </td>
+        `;
+        recordsBody.appendChild(row);
+    }
+
+    // This function deletes a record based on the timestamp
+    window.deleteRecord = function(timestamp) {
+        const records = JSON.parse(localStorage.getItem("healthRecords")) || [];
+        const newRecords = records.filter(record => record.timestamp !== timestamp);
+        localStorage.setItem("healthRecords", JSON.stringify(newRecords));
+        reloadRecords();
+    }
+
+    // Reload and display records after a deletion
+    function reloadRecords() {
+        recordsBody.innerHTML = "";
+        loadRecords();
+    }
+});
+</script>
+</body>
+</html>
