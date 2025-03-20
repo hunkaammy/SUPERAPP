@@ -1,356 +1,195 @@
-// Massive dataset for natural responses
+// Huge dataset with varied, natural responses
 const femdomResponses = {
     ballGagged: [
-        "Arre, ball gag daal dungi, muh band aur aankhon se aansu—bas yahi teri zindagi ab!",
-        "Tere bolne ki himmat? Gag se teri awaaz dabba dungi, chupchap meri baat sun.",
-        "Ball gag tight karungi, saans lene mein bhi dikkat hogi—mazaa lega na?",
-        "Ek baar gag lag gaya na, phir bolne ka sapna bhi mat dekhna, samjha?",
-        "Teri zubaan ko lock kar dungi, ab bas meri marzi ka shor sunai dega.",
-        "Gag se tera muh seal karungi, ab sirf meri awaaz teri duniya mein!",
-        "Chup karna hai? Ball gag se teri har awaaz dab jayegi, rone ke liye taiyaar reh!",
-        "Tere muh mein gag daal ke tujhe mera paltu banake rakhoongi!",
-        "Bolna band? Gag se teri zindagi silent film ban jayegi, samjha?",
-        "Ball gag ka swaad dungi, ab tu bas meri aankhon se dar!"
+        "Arre, tu bolna chahta hai? Ball gag se tera muh band karungi, ab chup reh!",
+        "Teri zubaan band karne ka time aa gaya, gag daalungi aur saans bhi mushkil karungi!",
+        "Ball gag tight karke tujhe mera paltu banaungi, bolne ka khayal bhi mat la!",
+        "Muh mein gag daal ke teri har awaaz dabba dungi, ab meri marzi chalegi!",
+        "Chup karna pasand hai? Gag se tujhe silent film ka hero banaungi, samjha?",
+        "Tere bolne ki aukaat nahi, gag se teri zindagi shant kar dungi!",
+        "Ball gag ka darr tujhe meri taakat yaad dilayega, ab rone ke liye taiyaar reh!",
+        "Ek baar gag lagaya na, phir teri awaaz meri permission ke bina nahi niklegi!",
+        "Tujhe chup karane ka mazaa alag hai, gag se tera muh seal karungi!",
+        "Bolna band karna hai? Ball gag se teri har saans meri control mein hogi!"
     ],
     whip: [
-        "Thodi si? Whip se teri puri peeth laal kar dungi, ginti karta reh!",
-        "Chabuk chalega ab, zor zor se—tujhe yaad rahega kaun rani hai yahan.",
-        "Whip ka swaad chakhayungi, har waar pe chillayega tu!",
-        "Ek baar chabuk padega na, phir rone ka bhi time nahi milega.",
-        "Teri chamdi pe whip ke nishaan banenge, mera autograph samajh!",
-        "Whip se teri haddi tak dard pahuncha dungi, taiyaar reh!",
-        "Har zor ka chabuk tujhe meri taakat yaad dilayega, samjha?",
-        "Whip se teri body ko sajaungi, laal rang mera pasandida hai!",
-        "Tujhe saza dungi, whip ke saath teri har galti ka hisaab hoga!",
-        "Chabuk se tujhe seedha karungi, ab rone ke liye taiyaar ho ja!"
+        "Saza chahiye? Whip se teri chamdi laal karungi, ginti karta rehna!",
+        "Chabuk se tujhe seedha karungi, har waar pe chillayega tu!",
+        "Whip ka zor tujhe meri rani ki taakat dikhayega, ab sehan kar!",
+        "Teri galti ka hisaab whip se karungi, laal nishaan chhodungi!",
+        "Ek baar chabuk chala na, phir rone ka bhi waqt nahi milega tujhe!",
+        "Whip se teri peeth pe mera autograph banega, mazaa lega na?",
+        "Har zor ka waar tujhe meri hukumat yaad dilayega, samjha?",
+        "Tujhe maar maar ke laal karungi, whip mera pasandida toy hai!",
+        "Chabuk se teri haddi tak dard pahunchaungi, ab taiyaar ho ja!",
+        "Whip ka swaad chakhna hai? Teri cheekhein meri jeet banengi!"
     ],
     handcuffs: [
-        "Hathkadi daal dungi, ab tu mera kaidi—bhaagne ki soch bhi mat!",
-        "Hath bandh ke tujhe mera samne jhukne ka mazaa dungi.",
-        "Ek baar hathkadi lagi na, phir meri ijazat ke bina hilna bhi mushkil!",
-        "Tere hatho ko aise jakdungi ki azadi bhool jayega, samjha?",
-        "Hathkadi mein tu mera paltu banega, chhodne ka mood nahi mera!",
-        "Hath bandhungi, ab tu meri marzi ka gulam—koi shikayat nahi!",
-        "Hathkadi se teri har harkat pe lock, ab bas meri hukumat chalegi!",
-        "Tujhe bandha hua dekhne ka mazaa alag hai, hathkadi ready hai!",
-        "Ek baar hath bandhe na, phir meri permission ke bina sapna bhi mat dekh!",
-        "Hathkadi ka darr tujhe meri taakat yaad dilayega, samjha?"
+        "Hath bandhne ka time hai, hathkadi se tujhe mera kaidi banaungi!",
+        "Tere hatho ko jakad ke tujhe meri samne jhukne pe majboor karungi!",
+        "Hathkadi daal dungi, ab tu meri marzi ka gulam—bhaagne ki soch bhi mat!",
+        "Ek baar hath bandhe na, phir meri ijazat ke bina hilna mushkil!",
+        "Hathkadi se teri azadi cheenungi, ab tu mera paltu kutta!",
+        "Tujhe bandha hua dekhna mera shauk hai, hathkadi ready hai!",
+        "Hath bandh ke teri har harkat pe lock lagaungi, samjha?",
+        "Hathkadi ka bandhan tujhe meri taakat mehsoos karwayega!",
+        "Tere hatho ko aise bandhungi ki tu meri rani ke samne sirf jhuke!",
+        "Hathkadi se tujhe mera banake rakhungi, ab koi shikayat nahi!"
     ],
     cage: [
-        "Cage mein daal dungi, chaabi phenk dungi—ab tu mera pinjre ka sher!",
-        "Band karna hai? Cage ke andar tujhe kutta banake rakhoongi.",
-        "Pinjra tera naya ghar, jab tak main na chahu, bahar mat sochna!",
-        "Cage ke andar tu mera khel banega, ab bhaunkna shuru kar!",
-        "Tere liye chhota sa pinjra ready hai, andar baith aur meri marzi ka wait kar.",
-        "Lock karungi tujhe cage mein, ab tu mera bandar—kudne ki koshish mat kar!",
-        "Cage mein daal ke tujhe saza ka ehsaas dilayungi, samjha?",
-        "Pinjre mein tu meri property, bahar nikalne ka khayal bhi mat la!",
-        "Cage ke andar teri zindagi, ab meri permission ke bina kuch nahi!",
-        "Tujhe band karke maze loongi, cage tera asli thikana hai ab!"
+        "Cage mein daal dungi, ab tu mera pinjre ka sher—chaabi phenk dungi!",
+        "Tujhe band karna hai? Cage ke andar kutta banake rakhoongi!",
+        "Pinjra tera naya thikana, jab tak main na chahu bahar nahi niklega!",
+        "Cage mein lock karke tujhe meri property banaungi, samjha?",
+        "Tere liye chhota sa pinjra hai, andar baith aur meri hukum ka wait kar!",
+        "Cage ke andar tu mera khelona, ab bhaunkne ke liye taiyaar reh!",
+        "Tujhe pinjre mein kaid karungi, bahar nikalne ka sapna bhi mat dekh!",
+        "Cage mein daal ke teri saza poori karungi, ab meri marzi chalegi!",
+        "Lock karke tujhe cage mein chhodungi, ab tu mera bandar banega!",
+        "Pinjra teri zindagi, ab meri permission ke bina kuch mat sochna!"
     ],
     nailScratch: [
-        "Nochungi, nakhun se teri khaal pe laal laal lakeer bana dungi!",
-        "Teri chamdi pe mere nakhun chalenge, dard ka mazaa lega na?",
-        "Ek baar noch diya na, phir har nishaan mera naam chillayega!",
-        "Rough chahiye? Noch noch ke tujhe mera banake chhodungi!",
-        "Tere badan pe mere nakhun ka jaadu chalega, rone ke liye taiyaar reh!",
-        "Nakhun se teri peeth cheer dungi, laal nishaan meri pehchaan!",
-        "Tujhe noch ke meri jeet ka nishaan banaungi, samjha?",
-        "Har scratch tujhe meri taakat yaad dilayega, ab sehan kar!",
-        "Nakhun se teri khaal pe design banaungi, mazaa aayega na?",
-        "Teri body pe mere nakhun ka khel, ab dard ka swagat kar!"
+        "Nochna hai? Nakhun se teri khaal pe laal lakeer banaungi, dard lega na?",
+        "Teri chamdi pe mere nishaan chhodungi, nakhun se cheer dungi!",
+        "Rough pasand hai? Noch noch ke tujhe mera banake rakhungi!",
+        "Ek baar nakhun chalaya na, phir har nishaan mera naam chillayega!",
+        "Tere badan pe nakhun ka jaadu chalega, rone ke liye taiyaar reh!",
+        "Nakhun se teri peeth pe design banaungi, laal rang mera favorite hai!",
+        "Tujhe noch ke meri jeet ka saboot chhodungi, samjha?",
+        "Har scratch tujhe meri rani ki taakat yaad dilayega, ab sehan kar!",
+        "Nakhun se teri khaal cheerungi, dard ka mazaa alag hai!",
+        "Teri body pe mera nakhun ka khel, ab chillane ke liye ready ho ja!"
     ],
     pain: [
-        "Dard? Teri har saans mein dard bhar dungi, tadapna shuru kar!",
-        "Itna dard dungi ki tu meri rehmat maangega, par milega nahi!",
-        "Dard ka tohfa dungi tujhe, har ek pal mein bas wahi mehsoos hoga!",
-        "Ek baar dard shuru hua na, phir ruki toh meri haar samajhna!",
-        "Dukh dungi itna ki tu meri taraf aankh uthane ki himmat na kare!",
-        "Teri haddiyan tak dard pahuncha dungi, rona bhi mushkil ho jayega!",
-        "Dard se teri cheekhein meri jeet banengi, taiyaar reh!",
-        "Har dard tujhe meri rani ki taakat yaad dilayega, samjha?",
-        "Tujhe tadpa tadpa ke rulaungi, dard mera weapon hai!",
-        "Dard ka maza dungi, ab tu bas meri marzi ka shikaar!"
+        "Dard chahiye? Teri har saans mein dard bharungi, tadapna shuru kar!",
+        "Itna dard dungi ki tu meri rehmat maangega, par main nahi sunungi!",
+        "Dard ka tohfa tujhe dungi, har pal mein bas wahi mehsoos hoga!",
+        "Ek baar dard shuru hua na, phir rukna meri marzi pe depend karega!",
+        "Teri haddiyan tak dard pahunchaungi, rona bhi mushkil ho jayega!",
+        "Dard se teri cheekhein meri jeet banengi, ab taiyaar ho ja!",
+        "Har dard tujhe meri hukumat yaad dilayega, samjha?",
+        "Tujhe tadpa tadpa ke rulaungi, dard mera best friend hai!",
+        "Dard ka maza dungi, ab tu bas meri marzi ka shikaar banega!",
+        "Teri har saans mein dard bharungi, ab sehan karne ki himmat rakh!"
     ],
     blood: [
-        "Khoon? Teri chamdi se tapkaungi, har boond meri jeet ka saboot!",
+        "Khoon nikalna hai? Teri chamdi se tapkaungi, har boond meri jeet hai!",
         "Ek chhed karungi, khoon behne dungi—mazaa aayega na tujhe?",
-        "Khoon nikalna hai? Teri khaal cheer ke rang laal kar dungi!",
+        "Teri khaal cheer ke khoon se laal karungi, rang mera pasandida hai!",
         "Tere andar ka khoon bahar laungi, phir dekhoongi kitna garam hai tu!",
-        "Khoon se khelungi, teri har cheekh meri jeet hogi!",
-        "Teri chamdi se khoon tapkayungi, laal rang mera pasandida hai!",
-        "Har boond khoon tujhe meri taakat yaad dilayega, samjha?",
-        "Khoon se teri body ko sajaungi, tapakta hua laal mazaa dega!",
-        "Tujhe cheer ke khoon ka nasha dungi, ab rone ke liye taiyaar reh!",
-        "Khoon nikalungi, teri har saans meri jeet chillayegi!"
+        "Khoon se khelungi, teri cheekhein meri jeet ka saboot banengi!",
+        "Teri chamdi se khoon tapkayungi, har boond meri taakat dikhayegi!",
+        "Khoon ka nasha dungi, tujhe cheer ke maza loongi!",
+        "Har boond khoon tujhe meri rani yaad dilayega, samjha?",
+        "Khoon se teri body ko sajaungi, tapakta laal rang meri jeet hai!",
+        "Tujhe khoon se geela karungi, ab rone ke liye taiyaar reh!"
     ],
     combo: [
-        "Sab kuch? Gag daalungi, whip maarungi, hathkadi pehnaungi, cage mein band, nochungi, dard dungi, khoon nikalungi—tu toot jayega!",
-        "Pura package chahiye? Har cheez se tujhe rulaungi, meri rani ka hukum pura!",
-        "Sab ek saath—gag se chup, whip se laal, cage mein band, khoon se geela—ab tu mera hai!",
-        "Tujhe har tarah se barbaad karungi—gag, chabuk, hathkadi, pinjra, nakhun, dard, khoon—sab tera naseeb!",
-        "Ek baar shuru hua na, phir gag se muh band, whip se peeth laal, cage mein kaid, khoon se khel—tu mera khelona!",
+        "Sab kuch chahiye? Gag daalungi, whip se maarungi, hathkadi se bandhungi, cage mein kaid, nochungi, dard dungi, khoon nikalungi—tu toot jayega!",
+        "Pura package dedungi—gag se chup, whip se laal, cage mein band, khoon se geela—ab tu mera gulam!",
+        "Sab ek saath karungi—gag ka darr, chabuk ka dard, hathkadi ka bandhan, cage ki saza, nakhun ka nishaan, khoon ka rang—teri khair nahi!",
+        "Tujhe har tarah se barbaad karungi—gag, whip, hathkadi, pinjra, noch, dard, khoon—sab tera naseeb!",
+        "Ek baar shuru hua na—gag se muh band, whip se peeth laal, cage mein kaid, khoon se khel—tu mera khelona banega!",
         "Sab kuch dungi—teri awaaz band, chamdi laal, hath bandhe, cage mein kaid, nakhun se noch, khoon se geela—ab bardasht kar!",
-        "Har cheez se tujhe saza—gag, whip, hathkadi, cage, nakhun, dard, khoon—teri zindagi meri marzi!",
-        "Pura set chahiye? Gag se chup, whip se chillaye, hathkadi se bandha, cage mein kaid, khoon tapkaye—tu mera gulam!",
-        "Sab milayega—gag ka darr, whip ka dard, hathkadi ka bandhan, cage ki saza, nakhun ka nishaan, khoon ka rang!",
-        "Tujhe poori tarah se barbaad karungi—gag, chabuk, bandhan, pinjra, noch, dard, khoon—ab tu mera hai!"
+        "Har cheez se saza—gag, chabuk, hathkadi, cage, nakhun, dard, khoon—teri zindagi meri marzi hai ab!",
+        "Pura set dedungi—gag se chup, whip se chillaye, hathkadi se bandha, cage mein kaid, khoon tapkaye—tu mera hai!",
+        "Sab milayega—gag ka darr, whip ka zor, hathkadi ka bandhan, cage ki kaid, nakhun ka dard, khoon ka rang—ab tu mera shikaar!",
+        "Tujhe poori tarah se todungi—gag, chabuk, bandhan, pinjra, noch, dard, khoon—ab meri rani ka raj chalega!"
     ]
 };
 
-// Function to get random response from an array
+// Enhanced grammar and intent analysis
+function analyzeInput(input) {
+    const lowerInput = input.toLowerCase().trim();
+    const words = lowerInput.split(/\s+/); // Split into words
+
+    // Detect intent based on grammar and keywords
+    const intents = {
+        request: words.some(w => ["kar", "do", "chahiye", "dedo"].includes(w)),
+        question: words.some(w => ["kya", "kaise", "kab", "kyun"].includes(w)),
+        statement: !words.some(w => ["kar", "do", "chahiye", "dedo", "kya", "kaise", "kab", "kyun"].includes(w))
+    };
+
+    // Detect category with more nuanceshema
+    const categories = {
+        ballGagged: ["chup", "bolna", "band", "muh", "silent", "gag"],
+        whip: ["saza", "maar", "whip", "chabuk", "dard", "laal"],
+        handcuffs: ["hath", "bandho", "rok", "jakad", "bandhan", "kaidi"],
+        cage: ["band", "andar", "cage", "pinjra", "kaid", "lock"],
+        nailScratch: ["noch", "rough", "scratch", "nakhun", "cheer", "nishaan"],
+        pain: ["dard", "dukh", "pain", "tadap", "chillay", "rone"],
+        blood: ["khoon", "blood", "garam", "tapka", "cheer", "laal"],
+        combo: ["sab", "pura", "all", "har", "ek", "saath"]
+    };
+
+    let matchedCategory = "combo"; // Default to combo for broad requests
+    for (const [category, keywords] of Object.entries(categories)) {
+        if (keywords.some(keyword => lowerInput.includes(keyword))) {
+            matchedCategory = category;
+            break;
+        }
+    }
+
+    return { category: matchedCategory, intent: intents.request ? "request" : intents.question ? "question" : "statement" };
+}
+
+// Random response selector
 function getRandomResponse(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-// Add AI conversation context
-set// Enhanced conversation context
-let conversationContext = {
-    lastCategory: null,
-    intensityLevel: 1,
-    lastUserMessage: "",
-    conversationHistory: [],
-    mood: 'dominant', // Can be 'angry', 'playful', 'strict'
-    userBehavior: 'submissive' // Can be 'resistant', 'eager', 'confused'
-};
-
-// Enhanced category detection with context
-function detectCategory(input) {
-    input = input.toLowerCase();
-    
-    // Update context based on user behavior
-    if (input.includes("nahi") || input.includes("mat")) {
-        conversationContext.userBehavior = 'resistant';
-    } else if (input.includes("hukum") || input.includes("karo")) {
-        conversationContext.userBehavior = 'eager';
-    }
-
-    // Update mood based on conversation
-    if (input.includes("kyun") || input.includes("kya")) {
-        conversationContext.mood = 'strict';
-    } else if (input.includes("please") || input.includes("kripya")) {
-        conversationContext.mood = 'playful';
-    }
-
-    // Check for context continuation
-    if (conversationContext.lastCategory && 
-        (input.includes("aur") || input.includes("phir") || input.includes("fir"))) {
-        return conversationContext.lastCategory;
-    }
-
-    // Update context
-    conversationContext.lastUserMessage = input;
-    conversationContext.conversationHistory.push({user: input});
-
-    // Check for intensity modifiers
-    if (input.includes("zada") || input.includes("aur") || input.includes("phir")) {
-        conversationContext.intensityLevel = Math.min(conversationContext.intensityLevel + 1, 3);
-    } else if (input.includes("kam") || input.includes("thoda")) {
-        conversationContext.intensityLevel = Math.max(conversationContext.intensityLevel - 1, 1);
-    }
-
-    // Enhanced category detection
-    if (input.includes("chup") || input.includes("bolna band") || input.includes("muh")) {
-        conversationContext.lastCategory = "ballGagged";
-        return "ballGagged";
-    }
-    if (input.includes("saza") || input.includes("maaro") || input.includes("whip")) return "whip";
-    if (input.includes("hath") || input.includes("bandho") || input.includes("rok")) return "handcuffs";
-    if (input.includes("band kar") || input.includes("andar") || input.includes("cage")) return "cage";
-    if (input.includes("noch") || input.includes("rough") || input.includes("scratch")) return "nailScratch";
-    if (input.includes("dard") || input.includes("dukh") || input.includes("pain")) return "pain";
-    if (input.includes("khoon") || input.includes("blood") || input.includes("garam")) return "blood";
-    if (input.includes("sab") || input.includes("pura") || input.includes("all")) return "combo";
-    return null;
-}
-
-// Enhanced response generation with context
+// Generate intelligent, grammar-aware response
 function generateBotResponse(userInput) {
-    const category = detectCategory(userInput);
-    let response = "";
+    const analysis = analyzeInput(userInput);
+    const { category, intent } = analysis;
 
-    if (category) {
-        const responses = femdomResponses[category];
-        response = getRandomResponse(responses);
-        
-        // Adjust response based on context
-        response = modifyResponseBasedOnContext(response);
-    } else {
-        // Enhanced default responses with context
-        response = getContextualDefaultResponse();
-    }
+    // Base response from dataset
+    let baseResponse = getRandomResponse(femdomResponses[category]);
 
-    // Update conversation history
-    conversationContext.conversationHistory.push({bot: response});
-    return response;
+    // Adjust response based on intent
+    if (intent === "question") {
+        baseResponse = `Kya? ${baseResponse} — samajh mein aaya ya aur saza chahiye?`;
+    } else if (intent === "statement") {
+        baseResponse = `Haan, thik hai, par ${baseResponse}`;
+    } // Request intent uses baseResponse as-is
+
+    // Add random cruel flair for personality
+    const flair = [
+        "nalayak!",
+        "tu meri marzi ka shikaar hai!",
+        "ab rone ke liye taiyaar reh!",
+        "teri khair nahi!",
+        "mera hukum maan!"
+    ];
+    return `${baseResponse} ${getRandomResponse(flair)}`;
 }
 
-// Helper function to modify responses based on context
-function modifyResponseBasedOnContext(response) {
-    // Adjust based on intensity
-    if (conversationContext.intensityLevel > 1) {
-        response = response.replace(/thoda/g, "bahut")
-                          .replace(/kam/g, "zyada")
-                          .replace(/dheere/g, "tez");
-    }
-
-    // Adjust based on mood
-    if (conversationContext.mood === 'angry') {
-        response = response.replace(/karungi/g, "kar dungi")
-                          .replace(/samjha/g, "samajh le");
-    } else if (conversationContext.mood === 'playful') {
-        response = response.replace(/karungi/g, "karungi na")
-                          .replace(/samjha/g, "samjhe?");
-    }
-
-    // Adjust based on user behavior
-    if (conversationContext.userBehavior === 'resistant') {
-        response = "Arre, himmat hai tujhe? " + response;
-    } else if (conversationContext.userBehavior === 'eager') {
-        response = "Achha, tujhe pasand aaya? " + response;
-    }
-
-    return response;
-}
-
-// Enhanced default responses with context
-function getContextualDefaultResponse() {
-    const defaults = {
-        confused: [
-            "Samjh nahi aaya, zara clear bolo...",
-            "Kya kehna chahti ho meri rani? Thik se bolo..."
-        ],
-        resistant: [
-            "Arre, himmat hai tujhe mujhse ladne ki?",
-            "Tujhe pata hai na ki main rani hoon?"
-        ],
-        eager: [
-            "Achha, tujhe pasand aaya? Aur chahiye?",
-            "Mazaa aa raha hai na? Aur batao kya karna hai..."
-        ]
-    };
-
-    return getRandomResponse(defaults[conversationContext.userBehavior] || defaults.confused);
-}
-
-// Function to send and display messages
-// Add typing simulation function
-function typeMessage(message, element, callback) {
-    let i = 0;
-    const typingSpeed = 30; // Adjust typing speed (milliseconds per character)
-    
-    function type() {
-        if (i < message.length) {
-            element.textContent += message.charAt(i);
-            i++;
-            setTimeout(type, typingSpeed);
-        } else {
-            if (callback) callback();
-        }
-    }
-    type();
-}
-
-// Modify sendMessage function to use typing simulation
+// Send and display messages
 function sendMessage() {
     const userInput = document.getElementById("user-input").value.trim();
     if (!userInput) return;
 
     const chatBox = document.getElementById("chat-box");
 
-    // Display user message
+    // User message
     const userMsg = document.createElement("div");
     userMsg.classList.add("chat-message", "user-message");
     userMsg.textContent = userInput;
     chatBox.appendChild(userMsg);
 
-    // Generate bot response
+    // Bot response
     const botResponse = generateBotResponse(userInput);
     const botMsg = document.createElement("div");
     botMsg.classList.add("chat-message", "bot-message");
+    botMsg.textContent = botResponse;
     chatBox.appendChild(botMsg);
 
-    // Simulate typing for bot response
-    typeMessage(botResponse, botMsg, () => {
-        // After typing is complete
-        chatBox.scrollTop = chatBox.scrollHeight;
-    });
-
-    // Clear input
+    // Clear input and scroll
     document.getElementById("user-input").value = "";
+    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
-// Add Enter key support
+// Enter key support
 document.getElementById("user-input").addEventListener("keypress", function(event) {
-    if (event.key === "Enter") {
-        sendMessage();
-    }
+    if (event.key === "Enter") sendMessage();
 });
-
-// Enhanced dataset additions
-const enhancedFemdomResponses = {
-    humiliation: [
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
-    ],
-    footWorship: [
-        "Mere pairon ki pooja kar, yehi teri zindagi ka maksad hai!",
-        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
-        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
-        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Mere pairon ki pooja kar, yehi teri zindagi ka maksad hai!",
-        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
-        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
-        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!"
-    ],
-    verbalAbuse: [
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
-    ],
-    psychological: [
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
-        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
-        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
-        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
-        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
-        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
-    ]
-};
-
-// Merge new categories into existing dataset
-Object.assign(femdomResponses, enhancedFemdomResponses);
-
-// Update detectCategory function to handle new categories
-function detectCategory(input) {
-    input = input.toLowerCase();
-    
-    // Add new category detections
-    if (input.includes("jhuk") || input.includes("pair")) return "humiliation";
-    if (input.includes("pooja") || input.includes("chum")) return "footWorship";
-    if (input.includes("gaali") || input.includes("abuse")) return "verbalAbuse";
-    if (input.includes("dimag") || input.includes("psychological")) return "psychological";
-
-    return null;
-}
