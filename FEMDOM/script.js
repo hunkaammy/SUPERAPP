@@ -103,10 +103,57 @@ function getRandomResponse(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-// Function to detect category from user input
+// Add AI conversation context
+set// Enhanced conversation context
+let conversationContext = {
+    lastCategory: null,
+    intensityLevel: 1,
+    lastUserMessage: "",
+    conversationHistory: [],
+    mood: 'dominant', // Can be 'angry', 'playful', 'strict'
+    userBehavior: 'submissive' // Can be 'resistant', 'eager', 'confused'
+};
+
+// Enhanced category detection with context
 function detectCategory(input) {
     input = input.toLowerCase();
-    if (input.includes("chup") || input.includes("bolna band")) return "ballGagged";
+    
+    // Update context based on user behavior
+    if (input.includes("nahi") || input.includes("mat")) {
+        conversationContext.userBehavior = 'resistant';
+    } else if (input.includes("hukum") || input.includes("karo")) {
+        conversationContext.userBehavior = 'eager';
+    }
+
+    // Update mood based on conversation
+    if (input.includes("kyun") || input.includes("kya")) {
+        conversationContext.mood = 'strict';
+    } else if (input.includes("please") || input.includes("kripya")) {
+        conversationContext.mood = 'playful';
+    }
+
+    // Check for context continuation
+    if (conversationContext.lastCategory && 
+        (input.includes("aur") || input.includes("phir") || input.includes("fir"))) {
+        return conversationContext.lastCategory;
+    }
+
+    // Update context
+    conversationContext.lastUserMessage = input;
+    conversationContext.conversationHistory.push({user: input});
+
+    // Check for intensity modifiers
+    if (input.includes("zada") || input.includes("aur") || input.includes("phir")) {
+        conversationContext.intensityLevel = Math.min(conversationContext.intensityLevel + 1, 3);
+    } else if (input.includes("kam") || input.includes("thoda")) {
+        conversationContext.intensityLevel = Math.max(conversationContext.intensityLevel - 1, 1);
+    }
+
+    // Enhanced category detection
+    if (input.includes("chup") || input.includes("bolna band") || input.includes("muh")) {
+        conversationContext.lastCategory = "ballGagged";
+        return "ballGagged";
+    }
     if (input.includes("saza") || input.includes("maaro") || input.includes("whip")) return "whip";
     if (input.includes("hath") || input.includes("bandho") || input.includes("rok")) return "handcuffs";
     if (input.includes("band kar") || input.includes("andar") || input.includes("cage")) return "cage";
@@ -117,28 +164,97 @@ function detectCategory(input) {
     return null;
 }
 
-// Function to generate a natural bot response
+// Enhanced response generation with context
 function generateBotResponse(userInput) {
     const category = detectCategory(userInput);
+    let response = "";
+
     if (category) {
-        return getRandomResponse(femdomResponses[category]);
+        const responses = femdomResponses[category];
+        response = getRandomResponse(responses);
+        
+        // Adjust response based on context
+        response = modifyResponseBasedOnContext(response);
     } else {
-        // Default responses for unrecognized input
-        const defaults = [
-            "Bol clearly, warna sab kuch ek saath kar dungi, samjha?",
-            "Kya kehna chahta hai? Thik se bol, nahi toh teri khair nahi!",
-            "Teri baat samajh nahi aayi, par saza toh milegi ab!",
-            "Kuch bhi bolega? Ab whip se teri akal thik karungi!",
-            "Confused hai tu? Thik hai, sab kuch ek saath try karte hai!"
-        ];
-        return getRandomResponse(defaults);
+        // Enhanced default responses with context
+        response = getContextualDefaultResponse();
     }
+
+    // Update conversation history
+    conversationContext.conversationHistory.push({bot: response});
+    return response;
+}
+
+// Helper function to modify responses based on context
+function modifyResponseBasedOnContext(response) {
+    // Adjust based on intensity
+    if (conversationContext.intensityLevel > 1) {
+        response = response.replace(/thoda/g, "bahut")
+                          .replace(/kam/g, "zyada")
+                          .replace(/dheere/g, "tez");
+    }
+
+    // Adjust based on mood
+    if (conversationContext.mood === 'angry') {
+        response = response.replace(/karungi/g, "kar dungi")
+                          .replace(/samjha/g, "samajh le");
+    } else if (conversationContext.mood === 'playful') {
+        response = response.replace(/karungi/g, "karungi na")
+                          .replace(/samjha/g, "samjhe?");
+    }
+
+    // Adjust based on user behavior
+    if (conversationContext.userBehavior === 'resistant') {
+        response = "Arre, himmat hai tujhe? " + response;
+    } else if (conversationContext.userBehavior === 'eager') {
+        response = "Achha, tujhe pasand aaya? " + response;
+    }
+
+    return response;
+}
+
+// Enhanced default responses with context
+function getContextualDefaultResponse() {
+    const defaults = {
+        confused: [
+            "Samjh nahi aaya, zara clear bolo...",
+            "Kya kehna chahti ho meri rani? Thik se bolo..."
+        ],
+        resistant: [
+            "Arre, himmat hai tujhe mujhse ladne ki?",
+            "Tujhe pata hai na ki main rani hoon?"
+        ],
+        eager: [
+            "Achha, tujhe pasand aaya? Aur chahiye?",
+            "Mazaa aa raha hai na? Aur batao kya karna hai..."
+        ]
+    };
+
+    return getRandomResponse(defaults[conversationContext.userBehavior] || defaults.confused);
 }
 
 // Function to send and display messages
+// Add typing simulation function
+function typeMessage(message, element, callback) {
+    let i = 0;
+    const typingSpeed = 30; // Adjust typing speed (milliseconds per character)
+    
+    function type() {
+        if (i < message.length) {
+            element.textContent += message.charAt(i);
+            i++;
+            setTimeout(type, typingSpeed);
+        } else {
+            if (callback) callback();
+        }
+    }
+    type();
+}
+
+// Modify sendMessage function to use typing simulation
 function sendMessage() {
     const userInput = document.getElementById("user-input").value.trim();
-    if (!userInput) return; // Ignore empty input
+    if (!userInput) return;
 
     const chatBox = document.getElementById("chat-box");
 
@@ -148,16 +264,20 @@ function sendMessage() {
     userMsg.textContent = userInput;
     chatBox.appendChild(userMsg);
 
-    // Generate and display bot response
+    // Generate bot response
     const botResponse = generateBotResponse(userInput);
     const botMsg = document.createElement("div");
     botMsg.classList.add("chat-message", "bot-message");
-    botMsg.textContent = botResponse;
     chatBox.appendChild(botMsg);
 
-    // Clear input and scroll to bottom
+    // Simulate typing for bot response
+    typeMessage(botResponse, botMsg, () => {
+        // After typing is complete
+        chatBox.scrollTop = chatBox.scrollHeight;
+    });
+
+    // Clear input
     document.getElementById("user-input").value = "";
-    chatBox.scrollTop = chatBox.scrollHeight;
 }
 
 // Add Enter key support
@@ -166,3 +286,71 @@ document.getElementById("user-input").addEventListener("keypress", function(even
         sendMessage();
     }
 });
+
+// Enhanced dataset additions
+const enhancedFemdomResponses = {
+    humiliation: [
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
+    ],
+    footWorship: [
+        "Mere pairon ki pooja kar, yehi teri zindagi ka maksad hai!",
+        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
+        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
+        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Mere pairon ki pooja kar, yehi teri zindagi ka maksad hai!",
+        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
+        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Mere pairon ko chum ke apni zindagi safal kar, samjha?",
+        "Mere pairon ki dhool tera naseeb, ab jhuk kar shukriya bol!"
+    ],
+    verbalAbuse: [
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
+    ],
+    psychological: [
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!",
+        "Tujhe apne pairon ke neeche jhukayungi, mera paani peena seekh!",
+        "Teri aukaat dikha dungi, ab bas meri jooti ki dhool teri pehchan!",
+        "Mera paani peene ka mauka dungi, shukriya bolna mat bhoolna!",
+        "Tujhe apne pairon mein ghisa ghisa ke rula dungi, samjha?",
+        "Meri jooti ki dhool tera naseeb, ab jhuk kar shukriya bol!"
+    ]
+};
+
+// Merge new categories into existing dataset
+Object.assign(femdomResponses, enhancedFemdomResponses);
+
+// Update detectCategory function to handle new categories
+function detectCategory(input) {
+    input = input.toLowerCase();
+    
+    // Add new category detections
+    if (input.includes("jhuk") || input.includes("pair")) return "humiliation";
+    if (input.includes("pooja") || input.includes("chum")) return "footWorship";
+    if (input.includes("gaali") || input.includes("abuse")) return "verbalAbuse";
+    if (input.includes("dimag") || input.includes("psychological")) return "psychological";
+
+    return null;
+}
