@@ -35,6 +35,7 @@
             display: flex;
             align-items: center;
             border-bottom: 3px solid #ff1f62;
+            cursor: pointer;
         }
         .chat-header img {
             width: 50px;
@@ -129,11 +130,67 @@
             background: linear-gradient(90deg, #f50057, #ff4081);
             transform: scale(1.05);
         }
+        /* Gallery Styles */
+        .gallery {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            padding: 20px;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+        }
+        .enlarged-image {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+        .enlarged-image img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+        }
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
     <div class="chat-container">
-        <div class="chat-header">
+        <div class="chat-header" onclick="toggleGallery()">
             <img src="https://via.placeholder.com/50/FF4081/FFFFFF?text=N" alt="Nandini DP">
             <h2>Nandini</h2>
         </div>
@@ -144,11 +201,34 @@
         </div>
     </div>
 
+    <!-- Gallery -->
+    <div class="gallery" id="gallery">
+        <span class="close-btn" onclick="toggleGallery()">×</span>
+        <div class="gallery-grid" id="galleryGrid">
+            <!-- Placeholder Images -->
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom1" alt="Femdom 1">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom2" alt="Femdom 2">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom3" alt="Femdom 3">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom4" alt="Femdom 4">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom5" alt="Femdom 5">
+        </div>
+    </div>
+
+    <!-- Enlarged Image -->
+    <div class="enlarged-image" id="enlargedImage">
+        <span class="close-btn" onclick="closeEnlargedImage()">×</span>
+        <img id="enlargedImg" src="" alt="Enlarged Image">
+    </div>
+
     <script>
         const chatBox = document.getElementById('chatBox');
         const userInput = document.getElementById('userInput');
+        const gallery = document.getElementById('gallery');
+        const galleryGrid = document.getElementById('galleryGrid');
+        const enlargedImage = document.getElementById('enlargedImage');
+        const enlargedImg = document.getElementById('enlargedImg');
         let chatHistory = [];
-        let currentScenario = null; // Ek scenario ko track karne ke liye
+        let currentScenario = null;
 
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
@@ -188,7 +268,6 @@
 
             let scenarioPrompt;
             if (!currentScenario) {
-                // Pehli baar ek random scenario set karo
                 const scenarios = [
                     "Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe",
                     "Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye",
@@ -249,6 +328,24 @@
             }
 
             userInput.value = '';
+        }
+
+        // Gallery Toggle
+        function toggleGallery() {
+            gallery.style.display = gallery.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Enlarge Image
+        galleryGrid.addEventListener('click', (e) => {
+            if (e.target.tagName === 'IMG') {
+                enlargedImg.src = e.target.src;
+                enlargedImage.style.display = 'flex';
+            }
+        });
+
+        // Close Enlarged Image
+        function closeEnlargedImage() {
+            enlargedImage.style.display = 'none';
         }
 
         userInput.addEventListener('keypress', (e) => {
