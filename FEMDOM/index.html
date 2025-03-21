@@ -7,14 +7,21 @@
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-            color: #fff;
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: background 0.3s;
+        }
+        body.dark {
+            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+            color: #fff;
+        }
+        body.light {
+            background: linear-gradient(135deg, #f0f0f0, #d9d9d9);
+            color: #000;
         }
         .chat-container {
             width: 100%;
@@ -24,6 +31,10 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             overflow: hidden;
             animation: fadeIn 0.5s ease-in;
+        }
+        body.light .chat-container {
+            background: #fff;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -37,20 +48,6 @@
             border-bottom: 3px solid #ff1f62;
             cursor: pointer;
         }
-        .chat-header img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
-        }
-        .chat-header h2 {
-            margin: 0;
-            font-size: 22px;
-            font-weight: bold;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
-        }
         .chat-box {
             height: 500px;
             overflow-y: auto;
@@ -58,6 +55,10 @@
             background: #2a2a2a;
             scrollbar-width: thin;
             scrollbar-color: #ff4081 #333;
+        }
+        body.light .chat-box {
+            background: #f5f5f5;
+            scrollbar-color: #ff4081 #ccc;
         }
         .chat-box::-webkit-scrollbar {
             width: 8px;
@@ -69,6 +70,9 @@
         .chat-box::-webkit-scrollbar-track {
             background: #333;
         }
+        body.light .chat-box::-webkit-scrollbar-track {
+            background: #ccc;
+        }
         .message {
             margin: 10px 0;
             padding: 12px 18px;
@@ -78,6 +82,7 @@
             display: inline-block;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             animation: slideIn 0.3s ease-out;
+            position: relative;
         }
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(10px); }
@@ -99,11 +104,18 @@
             margin: 10px 0;
             padding: 12px;
         }
+        body.light .typing {
+            color: #666;
+        }
         .input-area {
             display: flex;
             padding: 15px;
             background: #222;
             border-top: 1px solid #ff4081;
+        }
+        body.light .input-area {
+            background: #fff;
+            border-top: 1px solid #ccc;
         }
         input {
             flex: 1;
@@ -115,6 +127,10 @@
             outline: none;
             font-size: 16px;
             box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        body.light input {
+            background: #e0e0e0;
+            color: #000;
         }
         button {
             padding: 12px 25px;
@@ -130,7 +146,33 @@
             background: linear-gradient(90deg, #f50057, #ff4081);
             transform: scale(1.05);
         }
-        /* Gallery Styles */
+        .action-buttons {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #222;
+        }
+        body.light .action-buttons {
+            background: #fff;
+        }
+        .action-buttons button {
+            padding: 8px 15px;
+            font-size: 14px;
+            border-radius: 20px;
+        }
+        .copy-btn {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            font-size: 12px;
+            padding: 5px 10px;
+            background: #555;
+            border-radius: 10px;
+        }
+        body.light .copy-btn {
+            background: #ccc;
+            color: #000;
+        }
         .gallery {
             display: none;
             position: fixed;
@@ -142,6 +184,9 @@
             padding: 20px;
             overflow-y: auto;
             z-index: 1000;
+        }
+        body.light .gallery {
+            background: rgba(255, 255, 255, 0.9);
         }
         .gallery-grid {
             display: grid;
@@ -172,6 +217,9 @@
             align-items: center;
             z-index: 2000;
         }
+        body.light .enlarged-image {
+            background: rgba(255, 255, 255, 0.95);
+        }
         .enlarged-image img {
             max-width: 90%;
             max-height: 90%;
@@ -186,15 +234,61 @@
             color: #fff;
             cursor: pointer;
         }
+        body.light .close-btn {
+            color: #000;
+        }
+        .scenario-selector {
+            padding: 10px 20px;
+            background: #222;
+        }
+        body.light .scenario-selector {
+            background: #fff;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            background: #333;
+            color: #fff;
+            border: none;
+        }
+        body.light select {
+            background: #e0e0e0;
+            color: #000;
+        }
+        .typing-speed {
+            padding: 10px 20px;
+            background: #222;
+        }
+        body.light .typing-speed {
+            background: #fff;
+        }
     </style>
 </head>
-<body>
+<body class="dark">
     <div class="chat-container">
         <div class="chat-header" onclick="toggleGallery()">
             <img src="https://via.placeholder.com/50/FF4081/FFFFFF?text=N" alt="Nandini DP">
             <h2>Nandini</h2>
         </div>
+        <div class="scenario-selector">
+            <select id="scenarioSelect" onchange="setScenario()">
+                <option value="">Scenario Chuno</option>
+                <option value="Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe">Haveli</option>
+                <option value="Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye">Jungle</option>
+                <option value="Tujhe bathroom mein le jaake shower ke neeche khada kiya, tere haath pipe se bandhe">Bathroom</option>
+                <option value="Tujhe ek gaddi ke bonnet pe lita ke tere haath peeche bandhe">Car</option>
+            </select>
+        </div>
         <div class="chat-box" id="chatBox"></div>
+        <div class="typing-speed">
+            <label for="typingSpeed">Typing Speed: </label>
+            <input type="range" id="typingSpeed" min="500" max="3000" value="1000" onchange="updateTypingSpeed()">
+        </div>
+        <div class="action-buttons">
+            <button onclick="toggleTheme()">Theme Badlo</button>
+            <button onclick="clearChat()">Chat Clear Karo</button>
+        </div>
         <div class="input-area">
             <input type="text" id="userInput" placeholder="Nandini se baat kar!">
             <button onclick="sendMessage()">Bhej</button>
@@ -205,7 +299,6 @@
     <div class="gallery" id="gallery">
         <span class="close-btn" onclick="toggleGallery()">×</span>
         <div class="gallery-grid" id="galleryGrid">
-            <!-- Placeholder Images -->
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom1" alt="Femdom 1">
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom2" alt="Femdom 2">
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom3" alt="Femdom 3">
@@ -227,13 +320,20 @@
         const galleryGrid = document.getElementById('galleryGrid');
         const enlargedImage = document.getElementById('enlargedImage');
         const enlargedImg = document.getElementById('enlargedImg');
+        const scenarioSelect = document.getElementById('scenarioSelect');
         let chatHistory = [];
         let currentScenario = null;
+        let typingDelay = 1000; // Default typing speed
 
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${className}`;
             msgDiv.textContent = message;
+            const copyBtn = document.createElement('button');
+            copyBtn.textContent = 'Copy';
+            copyBtn.className = 'copy-btn';
+            copyBtn.onclick = () => navigator.clipboard.writeText(message);
+            msgDiv.appendChild(copyBtn);
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
         }
@@ -268,17 +368,21 @@
 
             let scenarioPrompt;
             if (!currentScenario) {
-                const scenarios = [
-                    "Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe",
-                    "Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye",
-                    "Tujhe bathroom mein le jaake shower ke neeche khada kiya, tere haath pipe se bandhe",
-                    "Tujhe ek gaddi ke bonnet pe lita ke tere haath peeche bandhe"
-                ];
-                currentScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+                currentScenario = scenarioSelect.value || "Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe";
                 scenarioPrompt = `Pehla scene yeh hai: "${currentScenario}". Is scene ke saath kahani shuru kar aur aage badha.`;
             } else {
                 scenarioPrompt = `Pehla scene jo shuru hua tha: "${currentScenario}". Isi scene ke saath kahani aage badha, naya twist daal.`;
             }
+
+            const punishments = [
+                "tujhe 10 thappad marungi",
+                "ek ghante tak bandha rakhungi",
+                "tere muh pe thook dungi",
+                "tujhe nanga karke tadpaungi"
+            ];
+            const randomPunishment = message.toLowerCase().includes("nahi") || message.toLowerCase().includes("sorry") 
+                ? `Aur saza ke taur pe ${punishments[Math.floor(Math.random() * punishments.length)]}.` 
+                : "";
 
             const prompt = `
                 Tu ek strict Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
@@ -288,10 +392,11 @@
                 bhadkau cheez kar rahi hai. ${scenarioPrompt} Hinglish ke shabd jaise "mere saamne jhuk ja re", 
                 "tu mera kutta banega", "mazze se tujhe tadpaungi" use kar, par "dil se dil tak" mat bolna. 
                 Aur sensual banane ke liye spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon 
-                ke paas aake siski dungi", "teri gardan pe chummi dungi" add kar. Puri chat ka context yaad 
-                rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein 
-                aage badhti rahe. Har reply twisted, tez aur poora rakho, ek dark flirty kahani ka full maza 
-                de. Yeh raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
+                ke paas aake siski dungi", "teri gardan pe chummi dungi" add kar. ${randomPunishment} Puri 
+                chat ka context yaad rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par 
+                kahani isi scene mein aage badhti rahe. Har reply twisted, tez aur poora rakho, ek dark 
+                flirty kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message 
+                ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -320,7 +425,7 @@
                 setTimeout(() => {
                     removeTypingIndicator();
                     addMessage(reply, 'mistress-message');
-                }, 1000);
+                }, typingDelay);
             } catch (error) {
                 console.error('Error:', error);
                 removeTypingIndicator();
@@ -328,6 +433,36 @@
             }
 
             userInput.value = '';
+        }
+
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            document.body.classList.toggle('light');
+        }
+
+        // Chat Clear
+        function clearChat() {
+            chatBox.innerHTML = '';
+            chatHistory = [];
+            currentScenario = null;
+            scenarioSelect.value = '';
+            addMessage("Nayi kahani shuru kar, bol kya chahta hai!", 'mistress-message');
+        }
+
+        // Scenario Selector
+        function setScenario() {
+            currentScenario = scenarioSelect.value;
+            if (currentScenario) {
+                chatBox.innerHTML = '';
+                chatHistory = [];
+                addMessage(`${currentScenario}, teri gardan pe chummi dete hui boli – ab bol re tu mera kutta hai ya nahi!`, 'mistress-message');
+            }
+        }
+
+        // Typing Speed
+        function updateTypingSpeed() {
+            typingDelay = document.getElementById('typingSpeed').value;
         }
 
         // Gallery Toggle
