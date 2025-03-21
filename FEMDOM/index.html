@@ -362,6 +362,97 @@
         let intensity = "medium";
         let lastMessageTime = Date.now();
 
+        // Punishments List with Toys
+        const punishmentsWithToys = {
+            low: [
+                "Tujhe spiked chastity cage pehnake thodi der tadpaungi, har spike teri chhati mein chubhega re!",
+                "Flogger with metal tips se tere peeth pe halke se marungi, dard ka maza lega na!",
+                "Nipple clamps with teeth lagaungi, phir halke se kheechungi, chilla mat Kutta!",
+                "Rough-edged paddle se teri thighs pe 5 baar marungi, jalan sehas re!",
+                "Electrosex wand ko low pe chalake teri kamar pe ghumaungi, thodi si bijli ka jhatka lega!",
+                "Wartenberg wheel se teri peeth pe chalake halke se nochungi, sharam se laal mat hona!",
+                "Spiked cock ring pehnake tujhe thodi der baithne bolungi, har movement mein chubhega!"
+            ],
+            medium: [
+                "Textured strap-on pehnake tujhe ghutno pe baithne bolungi, phir teri gardan pe haath rakhungi!",
+                "Clawed vibrator se teri kamar pe chalake thodi der tadpaungi, dard aur maza ek saath lega!",
+                "Weighted clamp pull se tere seene ko kheechungi, phir ek thandi cheez se chhuungi!",
+                "Barbed flogger se teri peeth pe 10 baar marungi, har baar mera naam bolna re!",
+                "Serrated dildo ko haath mein leke tujhe dikhake darayungi, phir teri aankhon pe blindfold lagaungi!",
+                "Spiked ball stretcher laga ke tujhe thodi der khada rakhungi, hilne ki himmat mat karna!",
+                "Razor-edged paddle se teri thighs pe 8 baar marungi, jalan se tadap re tu!"
+            ],
+            high: [
+                "Needle-tipped whip se teri peeth pe 15 baar marungi, har chot pe mera hukum yaad rakhna!",
+                "Studded chastity belt pehnake tujhe lock karungi, phir chabi mere gale mein daal ke tujhe chhedungi!",
+                "Jagged nipple rings laga ke tujhe kheechungi, phir ek garam cheez se teri kamar pe chhuungi!",
+                "Rough-textured plug daal ke tujhe ghutno pe baithne bolungi, har saans pe dard hoga!",
+                "Spiked roller toy se teri poori body pe ghumaungi, chilla mat warna aur karungi!",
+                "Electrosex probe sharp tip se teri kamar pe chalake bijli ka tez jhatka dungi, rone nahi dungi!",
+                "Metal-tipped crop se teri thighs pe 20 baar marungi, har baar sharam se laal ho ja!"
+            ]
+        };
+
+        // Punishments Without Toys
+        const punishmentsWithoutToys = {
+            low: [
+                "Tere chehre pe hard face slapping karungi, aankhein bandh karke sehas re!",
+                "Fingernail scratching se teri peeth pe nishaan banaungi, thodi si jalan lega na!",
+                "Belt whipping se teri thighs pe 5 baar marungi, ginti rakhna re!",
+                "Hairbrush spanking se teri kamar pe halke se marungi, sharam se mat jhukna!",
+                "Teri gardan pe biting karungi, phir tere kaan mein garam saans chhodungi!",
+                "Needle scratching se teri haath pe halke se kheechungi, dard ka maza lega!",
+                "Cane striking se teri peeth pe 3 baar marungi, chilla mat Kutta!"
+            ],
+            medium: [
+                "Hand spanking calloused hands se teri thighs pe 10 baar marungi, jalan se tadap re!",
+                "Pinching with nails se teri kamar ko nochungi, phir ek thandi cheez se chhuungi!",
+                "Bare-handed clawing se teri peeth pe nishaan banaungi, sharam se laal mat hona!",
+                "Back scratching deep se teri poori peeth ko nochungi, dard sehas re!",
+                "Thigh slapping rings on se teri thighs pe 8 baar marungi, har baar mera naam bolna!",
+                "Wooden spoon beating se teri kamar pe 6 baar marungi, hilne ki himmat mat karna!",
+                "Sharp knuckle rapping se tere haath pe chot dungi, rone nahi dungi!"
+            ],
+            high: [
+                "Heel stomping light se teri peeth pe dabaungi, phir tujhe ghutno pe baithne bolungi!",
+                "Leather strap lashing se teri poori body pe 15 baar marungi, har baar mera hukum sunna!",
+                "Tooth scraping se teri gardan pe nishaan banaungi, phir ek garam cheez se chhuungi!",
+                "Palm striking jewelry on se teri thighs pe 12 baar marungi, sharam se laal ho ja!",
+                "Knee grinding se teri kamar pe dabaungi, phir tujhe zameen pe letne bolungi!",
+                "Fingernail digging se teri peeth ko nochungi, dard se chillayega mat!",
+                "Switch cutting se teri thighs pe 10 baar marungi, har chot pe mera naam chilla!"
+            ]
+        };
+
+        // BDSM Toys List
+        const bdsmToys = [
+            "Spiked chastity cage - tujhe lock karungi, har spike teri chhati mein chubhega!",
+            "Flogger with metal tips - teri peeth pe marungi, metal ka dard lega re!",
+            "Nipple clamps with teeth - tere seene pe lagaungi, chilla mat Kutta!",
+            "Rough-edged paddle - teri thighs pe chalake jalan dungi!",
+            "Electrosex wand high setting - teri kamar pe chalake bijli ka jhatka dungi!",
+            "Wartenberg wheel - teri peeth pe ghumaungi, nochne ka maza dungi!",
+            "Spiked cock ring - tujhe pehnake tadpaungi, har movement mein chubhega!",
+            "Textured strap-on - pehnake tujhe ghutno pe laungi, sharam se laal mat hona!",
+            "Clawed vibrator - teri kamar pe chalake dard aur maza ek saath dungi!",
+            "Weighted clamp pull - tere seene ko kheechungi, dard sehas re!",
+            "Barbed flogger - teri peeth pe marungi, har baar nishaan banega!",
+            "Serrated dildo - haath mein leke tujhe darayungi, aankhein bandh kar!",
+            "Spiked ball stretcher - laga ke tujhe khada rakhungi, hilne ki himmat mat karna!",
+            "Razor-edged paddle - teri thighs pe marungi, jalan se tadapega tu!",
+            "Needle-tipped whip - teri peeth pe chalake chot dungi, mera naam bolna!",
+            "Studded chastity belt - tujhe lock karungi, chabi mere paas rahegi!",
+            "Jagged nipple rings - laga ke kheechungi, dard ka maza lega!",
+            "Rough-textured plug - daal ke tujhe baithne bolungi, har saans pe dard hoga!",
+            "Spiked roller toy - teri body pe ghumaungi, chilla mat warna aur karungi!",
+            "Electrosex probe sharp tip - teri kamar pe chalake tez jhatka dungi!",
+            "Metal-tipped crop - teri thighs pe marungi, sharam se laal ho ja!",
+            "Spiked harness strap - teri body ko kasungi, chubhan se tadapega!",
+            "Thorned vibrator sleeve - chalake teri kamar pe nochungi, dard lega!",
+            "Clawed massager - teri peeth pe ghumaungi, nishaan banega re!",
+            "Abrasive cock sleeve - pehnake tujhe thodi der tadpaungi, rone nahi dungi!"
+        ];
+
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${className}`;
@@ -402,7 +493,7 @@
 
             const typingDiv = addTypingIndicator();
 
-            const apiKeyGemini = "AIzaSyB_eDEcv0TA2gWEJ7dJ3hJ0ExWwrXgcOzw"; // Gemini API key
+            const apiKeyGemini = "AIzaSyB_eDEcv0TA2gWEJ7dJ3hJ0ExWwrXgcOzw";
             const historyString = chatHistory.map(entry => 
                 `Slave: ${entry.slave}\nNandini: ${entry.mistress}`
             ).join('\n');
@@ -419,14 +510,18 @@
             const intensityPrompt = `Intensity level yeh hai: "${intensity}". Low pe teasing aur light bondage, Medium pe moderate saza aur control, High pe extreme punishment aur humiliation rakho.`;
             const slaveNamePrompt = `Slave ka naam "${slaveName}" use kar har reply mein.`;
 
-            const punishments = {
-                low: ["tujhe thodi der ke liye bondage tape se bandhungi", "tere muh mein ring gag daalungi"],
-                medium: ["tujhe chabuk se 10 baar marungi", "teri aankhon pe bondage hood daal dungi"],
-                high: ["tere seene pe anal hook daal ke tujhe 15 chabuk marungi", "tujhe straitjacket mein kas ke pinjre mein band karungi"]
-            };
-            const randomPunishment = message.toLowerCase().includes("nahi") || message.toLowerCase().includes("sorry") 
-                ? `Aur saza ke taur pe ${punishments[intensity][Math.floor(Math.random() * punishments[intensity].length)]}.` 
-                : "";
+            // Random Punishment (Toys ya Without Toys) aur Toys
+            const useToys = Math.random() > 0.5; // 50% chance toys ya without toys
+            const randomPunishment = useToys 
+                ? punishmentsWithToys[intensity][Math.floor(Math.random() * punishmentsWithToys[intensity].length)]
+                : punishmentsWithoutToys[intensity][Math.floor(Math.random() * punishmentsWithoutToys[intensity].length)];
+            const randomToys = [
+                bdsmToys[Math.floor(Math.random() * bdsmToys.length)],
+                bdsmToys[Math.floor(Math.random() * bdsmToys.length)]
+            ];
+            const punishmentAndToysPrompt = useToys 
+                ? `Saza ke taur pe yeh scene bana: "${randomPunishment}". Aur in BDSM toys ka story mein use kar: "${randomToys[0]}" aur "${randomToys[1]}".`
+                : `Saza ke taur pe yeh scene bana (toys ke bina): "${randomPunishment}". Phir bhi in BDSM toys ka story mein use kar: "${randomToys[0]}" aur "${randomToys[1]}".`;
 
             const teases = [
                 "Teri aankhein bandh karke tujhe chhuungi, guess kar kaha?",
@@ -436,9 +531,9 @@
             const randomTease = teases[Math.floor(Math.random() * teases.length)];
 
             const commands = {
-                "jhuk": "Jhuk bola tune? To zameen pe let ja re, abhi bondage cuffs se bandhungi!",
+                "jhuk": "Jhuk bola tune? To zameen pe let ja re, abhi spiked chastity cage pehnake tadpaungi!",
                 "chup": "Chup bola? Muh mein muzzle gag daal ke tujhe chup karungi re!",
-                "bol": "Bol bola? To ab meri baat repeat kar, nahi toh nose hook lagaungi!"
+                "bol": "Bol bola? To ab meri baat repeat kar, nahi toh needle-tipped whip se marungi!"
             };
             const commandResponse = commands[message.toLowerCase()] || "";
 
@@ -447,20 +542,21 @@
                 ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse poore femdom 
                 style mein jawab de – sensual, aggressive, cruel, dominating, humiliating, aur teasing tareeke se, 
                 reply ko ek kahani ka scene jaisa bana jo shuru hue scene ke saath aage badhe. ${scenarioPrompt} 
-                ${slaveNamePrompt} ${intensityPrompt} ${customEquip} In BDSM equipments ka use kar: Armbinder, Anal hook, 
-                Bondage cuffs, Bondage mittens, Bondage harness, Bondage belt, Bondage hood, Bondage tape, Chain, Chastity 
-                device, Cock ring, Collar, Corset, Elbow harness, Head harness, Hobble skirt, Humbler, Mouth gag (ball gag, 
-                ring gag, muzzle gag), Nose hook, Padlock, Penis plug, Posture collar, Rope, Shackles, Sleepsacks, Spreader 
-                bar, Stocks, Straitjackets – inme se kuch randomly har reply mein daal. Femdom ke har element daal – bandhana, 
-                saza dena, control, sharamindagi, sensory play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise 
-                "mere saamne jhuk ja re", "tu mera kutta banega", "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, 
-                par "dil se dil tak" mat bolna. Spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas 
-                aake siski dungi", "teri gardan pe chummi dungi", "tere kaan mein garam saans chhodungi" add kar. 
-                Teasing line yeh daal: "${randomTease}". ${randomPunishment} Agar message mein "jhuk", "chup", ya "bol" 
-                hai toh uske hisaab se specific jawab de: ${commandResponse}. Puri chat ka context yaad rakh, pehle ki 
-                baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein aage badhti rahe. Har reply 
-                twisted, tez, detailed aur poora rakho, ek dark flirty femdom kahani ka full maza de. Yeh raha purana chat 
-                history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
+                ${slaveNamePrompt} ${intensityPrompt} ${customEquip} ${punishmentAndToysPrompt} In BDSM equipments 
+                ka use kar: Spiked chastity cage, Flogger with metal tips, Nipple clamps with teeth, Rough-edged paddle, 
+                Electrosex wand, Wartenberg wheel, Spiked cock ring, Textured strap-on, Clawed vibrator, Weighted clamp pull, 
+                Barbed flogger, Serrated dildo, Spiked ball stretcher, Razor-edged paddle, Needle-tipped whip, Studded chastity belt, 
+                Jagged nipple rings, Rough-textured plug, Spiked roller toy, Electrosex probe sharp tip, Metal-tipped crop, 
+                Spiked harness strap, Thorned vibrator sleeve, Clawed massager, Abrasive cock sleeve – inme se kuch randomly 
+                har reply mein daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, sensory play 
+                (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", 
+                "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, par "dil se dil tak" mat bolna. Spicy details jaise 
+                "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", "teri gardan pe chummi dungi", 
+                "tere kaan mein garam saans chhodungi" add kar. Teasing line yeh daal: "${randomTease}". Agar message mein 
+                "jhuk", "chup", ya "bol" hai toh uske hisaab se specific jawab de: ${commandResponse}. Puri chat ka context 
+                yaad rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein aage badhti 
+                rahe. Har reply twisted, tez, detailed aur poora rakho, ek dark flirty femdom kahani ka full maza de. Yeh 
+                raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -502,7 +598,7 @@
         // Timer-Based Punishment
         setInterval(() => {
             if (Date.now() - lastMessageTime > 30000) {
-                addMessage("Der kar diya re, ab chastity device pehen ke 10 minute tadap! Bol jaldi!", 'mistress-message');
+                addMessage("Der kar diya re, ab spiked chastity cage pehen ke 10 minute tadap! Bol jaldi!", 'mistress-message');
                 lastMessageTime = Date.now();
             }
         }, 10000);
@@ -528,7 +624,7 @@
             if (currentScenario) {
                 chatBox.innerHTML = '';
                 chatHistory = [];
-                addMessage(`${currentScenario}, teri gardan pe collar daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh tujhe bondage hood mein band karungi!`, 'mistress-message');
+                addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh needle-tipped whip se marungi!`, 'mistress-message');
             }
         }
 
@@ -570,7 +666,7 @@
         });
 
         // Initial message
-        addMessage(`Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe armbinder mein bandha, teri gardan pe posture collar daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
+        addMessage(`Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe spiked chastity cage pehnake bandha, teri gardan pe nipple clamps with teeth daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
     </script>
 </body>
 </html>
