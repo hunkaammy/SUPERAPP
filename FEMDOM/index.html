@@ -289,10 +289,10 @@
         <div class="scenario-selector">
             <select id="scenarioSelect" onchange="setScenario()">
                 <option value="">Apni Saza Chuno</option>
-                <option value="Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe armbinder mein bandha">Haveli ka Armbinder</option>
-                <option value="Tujhe jungle mein ek ped ke saath shackles se bandha, tere muh mein ball gag daala">Jungle ka Shackled Shikaar</option>
-                <option value="Tujhe bathroom mein shower ke neeche posture collar pehnaya, tere haath bondage cuffs mein bandhe">Pani ka Postured Gulam</option>
-                <option value="Tujhe ek gaddi ke bonnet pe lita ke chastity device laga diya, tere pairon pe spreader bar daali">Gaddi ka Chastised Kutta</option>
+                <option value="Tujhe ek andhere jungle mein le gayi, waha ped ke saath shackles se bandha">Jungle ka Shikanja</option>
+                <option value="Tujhe ek purane ghar ke basement mein le gayi, waha iron chair pe baandha">Basement ka Bandhan</option>
+                <option value="Tujhe ek barfili gufa mein le gayi, waha thandi zameen pe posture collar pehnaya">Gufa ka Gulam</option>
+                <option value="Tujhe ek sunsaan beach pe le gayi, waha ret mein spiked harness strap se bandha">Beach ka Shikaar</option>
             </select>
         </div>
         <div class="intensity-selector">
@@ -324,10 +324,10 @@
     <div class="gallery" id="gallery">
         <span class="close-btn" onclick="toggleGallery()">×</span>
         <div class="gallery-grid" id="galleryGrid">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Armbinder" alt="Armbinder">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Shackles" alt="Shackles">
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Chastity" alt="Chastity Device">
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Spreader" alt="Spreader Bar">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=BallGag" alt="Ball Gag">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Gag" alt="Ball Gag">
             <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Hood" alt="Bondage Hood">
         </div>
     </div>
@@ -361,6 +361,17 @@
         let slaveName = "Kutta";
         let intensity = "medium";
         let lastMessageTime = Date.now();
+
+        // Random Scenarios Array
+        const randomScenarios = [
+            "Tujhe ek andhere jungle mein le gayi, waha ped ke saath shackles se bandha aur teri aankhein blindfold se bandh di!",
+            "Tujhe ek purane ghar ke basement mein le gayi, waha iron chair pe spiked chastity cage pehnake baandha!",
+            "Tujhe ek barfili gufa mein le gayi, waha thandi zameen pe posture collar pehnaya aur tere haath bondage cuffs mein jakde!",
+            "Tujhe ek sunsaan beach pe le gayi, waha ret mein spiked harness strap se bandha aur teri gardan pe collar daala!",
+            "Tujhe ek khandar fort ke tower mein le gayi, waha ek purani table pe needle-tipped whip ke saath baandha!",
+            "Tujhe ek bheed bhare station ke paas ek chhote kamre mein le gayi, waha metal-tipped crop se tujhe control kiya!",
+            "Tujhe ek tez baarish wale jungle mein le gayi, waha ek gili zameen pe rough-textured plug ke saath bandha!"
+        ];
 
         // Punishments List with Toys
         const punishmentsWithToys = {
@@ -500,7 +511,7 @@
 
             let scenarioPrompt;
             if (!currentScenario) {
-                currentScenario = scenarioSelect.value || "Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe armbinder mein bandha";
+                currentScenario = scenarioSelect.value || randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
                 scenarioPrompt = `Pehla scene yeh hai: "${currentScenario}". Is scene ke saath kahani shuru kar aur aage badha.`;
             } else {
                 scenarioPrompt = `Pehla scene jo shuru hua tha: "${currentScenario}". Isi scene ke saath kahani aage badha, naya twist daal.`;
@@ -510,8 +521,7 @@
             const intensityPrompt = `Intensity level yeh hai: "${intensity}". Low pe teasing aur light bondage, Medium pe moderate saza aur control, High pe extreme punishment aur humiliation rakho.`;
             const slaveNamePrompt = `Slave ka naam "${slaveName}" use kar har reply mein.`;
 
-            // Random Punishment (Toys ya Without Toys) aur Toys
-            const useToys = Math.random() > 0.5; // 50% chance toys ya without toys
+            const useToys = Math.random() > 0.5;
             const randomPunishment = useToys 
                 ? punishmentsWithToys[intensity][Math.floor(Math.random() * punishmentsWithToys[intensity].length)]
                 : punishmentsWithoutToys[intensity][Math.floor(Math.random() * punishmentsWithoutToys[intensity].length)];
@@ -613,14 +623,13 @@
         function clearChat() {
             chatBox.innerHTML = '';
             chatHistory = [];
-            currentScenario = null;
-            scenarioSelect.value = '';
-            addMessage(`Nayi saza ke liye tayyar ho ja ${slaveName}, bol kya chahta hai re!`, 'mistress-message');
+            currentScenario = randomScenarios[Math.floor(Math.random() * randomScenarios.length)]; // Naya random scenario
+            addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh needle-tipped whip se marungi!`, 'mistress-message');
         }
 
         // Scenario Selector
         function setScenario() {
-            currentScenario = scenarioSelect.value;
+            currentScenario = scenarioSelect.value || randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
             if (currentScenario) {
                 chatBox.innerHTML = '';
                 chatHistory = [];
@@ -665,8 +674,9 @@
             if (e.key === 'Enter') sendMessage();
         });
 
-        // Initial message
-        addMessage(`Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe spiked chastity cage pehnake bandha, teri gardan pe nipple clamps with teeth daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
+        // Initial message with Random Scenario
+        currentScenario = randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
+        addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
     </script>
 </body>
 </html>
