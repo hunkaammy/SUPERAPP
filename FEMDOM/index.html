@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nandini - Strict Mistress Chatbot</title>
+    <title>Nandini - Ultimate Femdom Mistress</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
@@ -26,11 +26,12 @@
         .chat-container {
             width: 100%;
             max-width: 700px;
-            background: #222;
+            background: #1a1a1a;
             border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
             overflow: hidden;
             animation: fadeIn 0.5s ease-in;
+            border: 2px solid #ff1f62;
         }
         body.light .chat-container {
             background: #fff;
@@ -47,6 +48,14 @@
             align-items: center;
             border-bottom: 3px solid #ff1f62;
             cursor: pointer;
+        }
+        .chat-header img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            border: 2px solid #fff;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
         }
         .chat-box {
             height: 500px;
@@ -80,7 +89,7 @@
             max-width: 75%;
             word-wrap: break-word;
             display: inline-block;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
             animation: slideIn 0.3s ease-out;
             position: relative;
         }
@@ -99,18 +108,19 @@
             text-align: left;
         }
         .typing {
-            color: #aaa;
+            color: #ff4081;
             font-style: italic;
             margin: 10px 0;
             padding: 12px;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
         }
         body.light .typing {
-            color: #666;
+            color: #f50057;
         }
         .input-area {
             display: flex;
             padding: 15px;
-            background: #222;
+            background: #1a1a1a;
             border-top: 1px solid #ff4081;
         }
         body.light .input-area {
@@ -150,7 +160,7 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 20px;
-            background: #222;
+            background: #1a1a1a;
         }
         body.light .action-buttons {
             background: #fff;
@@ -166,12 +176,12 @@
             right: 5px;
             font-size: 12px;
             padding: 5px 10px;
-            background: #555;
+            background: #ff4081;
             border-radius: 10px;
         }
         body.light .copy-btn {
-            background: #ccc;
-            color: #000;
+            background: #f50057;
+            color: #fff;
         }
         .gallery {
             display: none;
@@ -201,6 +211,7 @@
             border-radius: 10px;
             cursor: pointer;
             transition: transform 0.2s;
+            border: 2px solid #ff1f62;
         }
         .gallery-grid img:hover {
             transform: scale(1.05);
@@ -231,15 +242,15 @@
             top: 10px;
             right: 20px;
             font-size: 30px;
-            color: #fff;
+            color: #ff4081;
             cursor: pointer;
         }
         body.light .close-btn {
-            color: #000;
+            color: #f50057;
         }
         .scenario-selector {
             padding: 10px 20px;
-            background: #222;
+            background: #1a1a1a;
         }
         body.light .scenario-selector {
             background: #fff;
@@ -250,15 +261,16 @@
             border-radius: 10px;
             background: #333;
             color: #fff;
-            border: none;
+            border: 1px solid #ff4081;
         }
         body.light select {
             background: #e0e0e0;
             color: #000;
+            border: 1px solid #f50057;
         }
         .typing-speed {
             padding: 10px 20px;
-            background: #222;
+            background: #1a1a1a;
         }
         body.light .typing-speed {
             background: #fff;
@@ -273,24 +285,24 @@
         </div>
         <div class="scenario-selector">
             <select id="scenarioSelect" onchange="setScenario()">
-                <option value="">Scenario Chuno</option>
-                <option value="Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe">Haveli</option>
-                <option value="Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye">Jungle</option>
-                <option value="Tujhe bathroom mein le jaake shower ke neeche khada kiya, tere haath pipe se bandhe">Bathroom</option>
-                <option value="Tujhe ek gaddi ke bonnet pe lita ke tere haath peeche bandhe">Car</option>
+                <option value="">Apni Saza Chuno</option>
+                <option value="Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe">Haveli ka Qaidi</option>
+                <option value="Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye">Jungle ka Shikaar</option>
+                <option value="Tujhe bathroom mein le jaake shower ke neeche khada kiya, tere haath pipe se bandhe">Pani ki Saza</option>
+                <option value="Tujhe ek gaddi ke bonnet pe lita ke tere haath peeche bandhe">Gaddi ka Gulam</option>
             </select>
         </div>
         <div class="chat-box" id="chatBox"></div>
         <div class="typing-speed">
-            <label for="typingSpeed">Typing Speed: </label>
+            <label for="typingSpeed">Tadapne ka Time: </label>
             <input type="range" id="typingSpeed" min="500" max="3000" value="1000" onchange="updateTypingSpeed()">
         </div>
         <div class="action-buttons">
             <button onclick="toggleTheme()">Theme Badlo</button>
-            <button onclick="clearChat()">Chat Clear Karo</button>
+            <button onclick="clearChat()">Naya Shikanja</button>
         </div>
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="Nandini se baat kar!">
+            <input type="text" id="userInput" placeholder="Mistress ko jawab de!">
             <button onclick="sendMessage()">Bhej</button>
         </div>
     </div>
@@ -299,11 +311,11 @@
     <div class="gallery" id="gallery">
         <span class="close-btn" onclick="toggleGallery()">×</span>
         <div class="gallery-grid" id="galleryGrid">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom1" alt="Femdom 1">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom2" alt="Femdom 2">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom3" alt="Femdom 3">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom4" alt="Femdom 4">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Femdom5" alt="Femdom 5">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Whip" alt="Whip">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Chains" alt="Chains">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Leather" alt="Leather">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Blindfold" alt="Blindfold">
+            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Cage" alt="Cage">
         </div>
     </div>
 
@@ -323,7 +335,7 @@
         const scenarioSelect = document.getElementById('scenarioSelect');
         let chatHistory = [];
         let currentScenario = null;
-        let typingDelay = 1000; // Default typing speed
+        let typingDelay = 1000;
 
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
@@ -341,7 +353,7 @@
         function addTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message typing';
-            typingDiv.textContent = 'typing...';
+            typingDiv.textContent = 'Mistress tayyar hai...';
             typingDiv.id = 'typingIndicator';
             chatBox.appendChild(typingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -375,10 +387,11 @@
             }
 
             const punishments = [
-                "tujhe 10 thappad marungi",
-                "ek ghante tak bandha rakhungi",
-                "tere muh pe thook dungi",
-                "tujhe nanga karke tadpaungi"
+                "tujhe chabuk se 10 baar marungi",
+                "teri aankhon pe patti baandh ke andhere mein chhodungi",
+                "tere muh pe thook ke tujhe zaleel karungi",
+                "tujhe ek pinjre mein band karke tadpaungi",
+                "tere pairon pe garam mom daalungi"
             ];
             const randomPunishment = message.toLowerCase().includes("nahi") || message.toLowerCase().includes("sorry") 
                 ? `Aur saza ke taur pe ${punishments[Math.floor(Math.random() * punishments.length)]}.` 
@@ -386,17 +399,19 @@
 
             const prompt = `
                 Tu ek strict Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
-                ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse bahut 
-                zyada sensual, aggressive aur cruel tareeke se jawab de, reply ko ek kahani ka scene jaisa 
-                bana jo shuru hue scene ke saath aage badhe, jaise tu slave ke saath kuch dark, flirty aur 
-                bhadkau cheez kar rahi hai. ${scenarioPrompt} Hinglish ke shabd jaise "mere saamne jhuk ja re", 
-                "tu mera kutta banega", "mazze se tujhe tadpaungi" use kar, par "dil se dil tak" mat bolna. 
-                Aur sensual banane ke liye spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon 
-                ke paas aake siski dungi", "teri gardan pe chummi dungi" add kar. ${randomPunishment} Puri 
-                chat ka context yaad rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par 
-                kahani isi scene mein aage badhti rahe. Har reply twisted, tez aur poora rakho, ek dark 
-                flirty kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message 
-                ka jawab pure Hinglish mein de.
+                ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse poore 
+                femdom style mein jawab de – sensual, aggressive, cruel, dominating, humiliating aur teasing 
+                tareeke se, reply ko ek kahani ka scene jaisa bana jo shuru hue scene ke saath aage badhe. 
+                ${scenarioPrompt} Femdom ke har element daal – bandhana, saza dena (chabuk, thappad, etc.), 
+                control (order dena), sharamindagi (zaleel karna), aur sensory play (garam mom, thandi cheez, 
+                aankh bandh karna). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", 
+                "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, par "dil se dil tak" mat bolna. Spicy 
+                details jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", "teri 
+                gardan pe chummi dungi", "tere kaan mein garam saans chhodungi" add kar. ${randomPunishment} 
+                Puri chat ka context yaad rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par 
+                kahani isi scene mein aage badhti rahe. Har reply twisted, tez, detailed aur poora rakho, ek 
+                dark flirty femdom kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb 
+                is message ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -405,7 +420,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         contents: [{ parts: [{ text: prompt }] }],
-                        generationConfig: { maxOutputTokens: 300, temperature: 1.0 }
+                        generationConfig: { maxOutputTokens: 300, temperature: 1.1 }
                     })
                 });
 
@@ -447,7 +462,7 @@
             chatHistory = [];
             currentScenario = null;
             scenarioSelect.value = '';
-            addMessage("Nayi kahani shuru kar, bol kya chahta hai!", 'mistress-message');
+            addMessage("Nayi saza ke liye tayyar ho ja, bol kya chahta hai re!", 'mistress-message');
         }
 
         // Scenario Selector
@@ -456,7 +471,7 @@
             if (currentScenario) {
                 chatBox.innerHTML = '';
                 chatHistory = [];
-                addMessage(`${currentScenario}, teri gardan pe chummi dete hui boli – ab bol re tu mera kutta hai ya nahi!`, 'mistress-message');
+                addMessage(`${currentScenario}, teri gardan pe chabuk pherte hui boli – ab mera hukum maan re, nahi toh tujhe zaleel karungi!`, 'mistress-message');
             }
         }
 
@@ -488,7 +503,7 @@
         });
 
         // Initial message
-        addMessage("Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe, teri gardan pe chummi dete hui boli – ab bol re tu mera kutta hai ya nahi!", 'mistress-message');
+        addMessage("Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe, teri gardan pe chabuk pherte hui boli – ab mera hukum maan re, tu mera kutta banega ya nahi!", 'mistress-message');
     </script>
 </body>
 </html>
