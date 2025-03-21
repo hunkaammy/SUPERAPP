@@ -148,27 +148,14 @@
         const chatBox = document.getElementById('chatBox');
         const userInput = document.getElementById('userInput');
         let chatHistory = [];
+        let currentScenario = null; // Ek scenario ko track karne ke liye
 
-        function addMessage(message, className, speak = false) {
+        function addMessage(message, className) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${className}`;
             msgDiv.textContent = message;
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
-
-            if (speak && className === 'mistress-message') {
-                const utterance = new SpeechSynthesisUtterance(message);
-                utterance.lang = 'hi-IN';
-                utterance.pitch = 0.7; // Aur low pitch sensual ke liye
-                utterance.rate = 0.85; // Thoda slow aur sultry
-                utterance.volume = 1;
-
-                const voices = window.speechSynthesis.getVoices();
-                const femaleVoice = voices.find(v => v.lang === 'hi-IN' && v.name.includes('female')) || voices[0];
-                utterance.voice = femaleVoice;
-
-                window.speechSynthesis.speak(utterance);
-            }
         }
 
         function addTypingIndicator() {
@@ -199,19 +186,33 @@
                 `Slave: ${entry.slave}\nNandini: ${entry.mistress}`
             ).join('\n');
 
+            let scenarioPrompt;
+            if (!currentScenario) {
+                // Pehli baar ek random scenario set karo
+                const scenarios = [
+                    "Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe",
+                    "Tujhe jungle mein ek ped ke saath bandha, tere dono haath upar tight kiye",
+                    "Tujhe bathroom mein le jaake shower ke neeche khada kiya, tere haath pipe se bandhe",
+                    "Tujhe ek gaddi ke bonnet pe lita ke tere haath peeche bandhe"
+                ];
+                currentScenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+                scenarioPrompt = `Pehla scene yeh hai: "${currentScenario}". Is scene ke saath kahani shuru kar aur aage badha.`;
+            } else {
+                scenarioPrompt = `Pehla scene jo shuru hua tha: "${currentScenario}". Isi scene ke saath kahani aage badha, naya twist daal.`;
+            }
+
             const prompt = `
                 Tu ek strict Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
                 ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse bahut 
                 zyada sensual, aggressive aur cruel tareeke se jawab de, reply ko ek kahani ka scene jaisa 
-                bana jaise tu slave ke saath kuch dark, flirty aur bhadkau cheez kar rahi hai (misal ke liye 
-                "tujhe kursi pe bitha ke tere dono haath tight bandhungi, phir tere gale pe ungliya pherungi"). 
-                Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", "mazze se tujhe 
-                tadpaungi" use kar, par "dil se dil tak" mat bolna. Aur sensual banane ke liye spicy details 
-                jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", "teri gardan 
-                pe chummi dungi" add kar. Puri chat ka context yaad rakh, pehle ki baatein soch ke jawab 
-                logical aur judaa hua bana. Har reply naya, twisted, tez aur poora rakho, ek dark flirty 
-                kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message ka 
-                jawab pure Hinglish mein de.
+                bana jo shuru hue scene ke saath aage badhe, jaise tu slave ke saath kuch dark, flirty aur 
+                bhadkau cheez kar rahi hai. ${scenarioPrompt} Hinglish ke shabd jaise "mere saamne jhuk ja re", 
+                "tu mera kutta banega", "mazze se tujhe tadpaungi" use kar, par "dil se dil tak" mat bolna. 
+                Aur sensual banane ke liye spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon 
+                ke paas aake siski dungi", "teri gardan pe chummi dungi" add kar. Puri chat ka context yaad 
+                rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein 
+                aage badhti rahe. Har reply twisted, tez aur poora rakho, ek dark flirty kahani ka full maza 
+                de. Yeh raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -224,36 +225,38 @@
                     })
                 });
 
+                if (!geminiResponse.ok) {
+                    throw new Error("API response fail hua: " + geminiResponse.status);
+                }
+
                 const geminiData = await geminiResponse.json();
                 if (!geminiData.candidates || !geminiData.candidates[0]) {
-                    throw new Error("Gemini gadbad");
+                    throw new Error("Gemini se koi jawab nahi mila");
                 }
+
                 const reply = geminiData.candidates[0].content.parts[0].text.trim();
 
                 chatHistory.push({ slave: message, mistress: reply });
 
                 setTimeout(() => {
                     removeTypingIndicator();
-                    addMessage(reply, 'mistress-message', true);
+                    addMessage(reply, 'mistress-message');
                 }, 1000);
             } catch (error) {
                 console.error('Error:', error);
                 removeTypingIndicator();
-                addMessage("Abe slave, kuch toh gadbad hai, phir se bol!", 'mistress-message', true);
+                addMessage("Abe slave, kuch toh gadbad hai, phir se bol!", 'mistress-message');
             }
 
             userInput.value = '';
         }
 
-        window.speechSynthesis.onvoiceschanged = () => {
-            console.log("Available voices:", window.speechSynthesis.getVoices());
-        };
-
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
 
-        addMessage("Tujhe kursi pe bitha ke tere dono haath tight bandhe, teri gardan pe ungliya pherte hui boli – ab bol re tu mera kutta hai ya nahi!", 'mistress-message', true);
+        // Initial message
+        addMessage("Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe khada karke haath bandhe, teri gardan pe chummi dete hui boli – ab bol re tu mera kutta hai ya nahi!", 'mistress-message');
     </script>
 </body>
 </html>
