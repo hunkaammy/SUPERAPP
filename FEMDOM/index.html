@@ -248,14 +248,14 @@
         body.light .close-btn {
             color: #f50057;
         }
-        .scenario-selector {
+        .scenario-selector, .intensity-selector, .custom-equipment, .slave-name {
             padding: 10px 20px;
             background: #1a1a1a;
         }
-        body.light .scenario-selector {
+        body.light .scenario-selector, body.light .intensity-selector, body.light .custom-equipment, body.light .slave-name {
             background: #fff;
         }
-        select {
+        select, input[type="text"] {
             width: 100%;
             padding: 10px;
             border-radius: 10px;
@@ -263,7 +263,7 @@
             color: #fff;
             border: 1px solid #ff4081;
         }
-        body.light select {
+        body.light select, body.light input[type="text"] {
             background: #e0e0e0;
             color: #000;
             border: 1px solid #f50057;
@@ -283,6 +283,9 @@
             <img src="https://via.placeholder.com/50/FF4081/FFFFFF?text=N" alt="Nandini DP">
             <h2>Nandini</h2>
         </div>
+        <div class="slave-name">
+            <input type="text" id="slaveName" placeholder="Apna slave naam daal (default: Kutta)" onchange="setSlaveName()">
+        </div>
         <div class="scenario-selector">
             <select id="scenarioSelect" onchange="setScenario()">
                 <option value="">Apni Saza Chuno</option>
@@ -291,6 +294,16 @@
                 <option value="Tujhe bathroom mein shower ke neeche posture collar pehnaya, tere haath bondage cuffs mein bandhe">Pani ka Postured Gulam</option>
                 <option value="Tujhe ek gaddi ke bonnet pe lita ke chastity device laga diya, tere pairon pe spreader bar daali">Gaddi ka Chastised Kutta</option>
             </select>
+        </div>
+        <div class="intensity-selector">
+            <select id="intensityLevel" onchange="setIntensity()">
+                <option value="low">Low - Teasing aur Light Bondage</option>
+                <option value="medium" selected>Medium - Moderate Saza aur Control</option>
+                <option value="high">High - Extreme Punishment aur Humiliation</option>
+            </select>
+        </div>
+        <div class="custom-equipment">
+            <input type="text" id="customEquipment" placeholder="Apna pasandida equipment daal (jaise whip)">
         </div>
         <div class="chat-box" id="chatBox"></div>
         <div class="typing-speed">
@@ -325,6 +338,10 @@
         <img id="enlargedImg" src="" alt="Enlarged Image">
     </div>
 
+    <!-- Audio for Sound Effects -->
+    <audio id="whipSound" src="https://freesound.org/data/previews/219/219477_4008673-lq.mp3"></audio>
+    <audio id="chainSound" src="https://freesound.org/data/previews/145/145443_2585126-lq.mp3"></audio>
+
     <script>
         const chatBox = document.getElementById('chatBox');
         const userInput = document.getElementById('userInput');
@@ -333,9 +350,17 @@
         const enlargedImage = document.getElementById('enlargedImage');
         const enlargedImg = document.getElementById('enlargedImg');
         const scenarioSelect = document.getElementById('scenarioSelect');
+        const intensityLevel = document.getElementById('intensityLevel');
+        const customEquipment = document.getElementById('customEquipment');
+        const slaveNameInput = document.getElementById('slaveName');
+        const whipSound = document.getElementById('whipSound');
+        const chainSound = document.getElementById('chainSound');
         let chatHistory = [];
         let currentScenario = null;
         let typingDelay = 1000;
+        let slaveName = "Kutta";
+        let intensity = "medium";
+        let lastMessageTime = Date.now();
 
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
@@ -348,12 +373,15 @@
             msgDiv.appendChild(copyBtn);
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
+            if (className === 'mistress-message') {
+                Math.random() > 0.5 ? whipSound.play() : chainSound.play();
+            }
         }
 
         function addTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message typing';
-            typingDiv.textContent = 'Mistress tujhe tadpane ke liye tayyar hai...';
+            typingDiv.textContent = `Mistress ${slaveName} ko tadpane ke liye tayyar hai...`;
             typingDiv.id = 'typingIndicator';
             chatBox.appendChild(typingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -370,6 +398,7 @@
             if (message === '') return;
 
             addMessage(message, 'user-message');
+            lastMessageTime = Date.now();
 
             const typingDiv = addTypingIndicator();
 
@@ -386,35 +415,52 @@
                 scenarioPrompt = `Pehla scene jo shuru hua tha: "${currentScenario}". Isi scene ke saath kahani aage badha, naya twist daal.`;
             }
 
-            const punishments = [
-                "tujhe chabuk se 15 baar marungi aur tere muh mein penis gag daalungi",
-                "teri aankhon pe bondage hood daal ke tujhe andhere mein chhodungi",
-                "tere pairon pe spreader bar laga ke tujhe zaleel karungi",
-                "tujhe straitjacket mein kas ke ek pinjre mein band karungi",
-                "tere seene pe anal hook daal ke tujhe tadpaungi"
-            ];
+            const customEquip = customEquipment.value.trim() ? `Aur yeh custom equipment use kar: "${customEquipment.value}".` : "";
+            const intensityPrompt = `Intensity level yeh hai: "${intensity}". Low pe teasing aur light bondage, Medium pe moderate saza aur control, High pe extreme punishment aur humiliation rakho.`;
+            const slaveNamePrompt = `Slave ka naam "${slaveName}" use kar har reply mein.`;
+
+            const punishments = {
+                low: ["tujhe thodi der ke liye bondage tape se bandhungi", "tere muh mein ring gag daalungi"],
+                medium: ["tujhe chabuk se 10 baar marungi", "teri aankhon pe bondage hood daal dungi"],
+                high: ["tere seene pe anal hook daal ke tujhe 15 chabuk marungi", "tujhe straitjacket mein kas ke pinjre mein band karungi"]
+            };
             const randomPunishment = message.toLowerCase().includes("nahi") || message.toLowerCase().includes("sorry") 
-                ? `Aur saza ke taur pe ${punishments[Math.floor(Math.random() * punishments.length)]}.` 
+                ? `Aur saza ke taur pe ${punishments[intensity][Math.floor(Math.random() * punishments[intensity].length)]}.` 
                 : "";
+
+            const teases = [
+                "Teri aankhein bandh karke tujhe chhuungi, guess kar kaha?",
+                "Tere liye ek garam surprise tayyar hai, tadapega tu!",
+                "Teri har saans pe nazar rakhoongi, control mera hai re!"
+            ];
+            const randomTease = teases[Math.floor(Math.random() * teases.length)];
+
+            const commands = {
+                "jhuk": "Jhuk bola tune? To zameen pe let ja re, abhi bondage cuffs se bandhungi!",
+                "chup": "Chup bola? Muh mein muzzle gag daal ke tujhe chup karungi re!",
+                "bol": "Bol bola? To ab meri baat repeat kar, nahi toh nose hook lagaungi!"
+            };
+            const commandResponse = commands[message.toLowerCase()] || "";
 
             const prompt = `
                 Tu ek supreme Femdom Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
                 ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse poore femdom 
                 style mein jawab de – sensual, aggressive, cruel, dominating, humiliating, aur teasing tareeke se, 
                 reply ko ek kahani ka scene jaisa bana jo shuru hue scene ke saath aage badhe. ${scenarioPrompt} 
-                In BDSM equipments ka use kar: Armbinder, Anal hook, Bondage cuffs, Bondage mittens, Bondage harness, 
-                Bondage belt, Bondage hood, Bondage tape, Chain, Chastity device, Cock ring, Collar, Corset, Elbow harness, 
-                Head harness, Hobble skirt, Humbler, Mouth gag (ball gag, ring gag, muzzle gag), Nose hook, Padlock, 
-                Penis plug, Posture collar, Rope, Shackles, Sleepsacks, Spreader bar, Stocks, Straitjackets – inme se 
-                kuch randomly har reply mein daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, 
-                sensory play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", 
-                "tu mera kutta banega", "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, par "dil se dil tak" 
-                mat bolna. Spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", 
-                "teri gardan pe chummi dungi", "tere kaan mein garam saans chhodungi", "teri aankhon pe tape lagaungi" 
-                add kar. ${randomPunishment} Puri chat ka context yaad rakh, pehle ki baatein soch ke jawab logical aur 
-                judaa hua bana, par kahani isi scene mein aage badhti rahe. Har reply twisted, tez, detailed aur poora 
-                rakho, ek dark flirty femdom kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb 
-                is message ka jawab pure Hinglish mein de.
+                ${slaveNamePrompt} ${intensityPrompt} ${customEquip} In BDSM equipments ka use kar: Armbinder, Anal hook, 
+                Bondage cuffs, Bondage mittens, Bondage harness, Bondage belt, Bondage hood, Bondage tape, Chain, Chastity 
+                device, Cock ring, Collar, Corset, Elbow harness, Head harness, Hobble skirt, Humbler, Mouth gag (ball gag, 
+                ring gag, muzzle gag), Nose hook, Padlock, Penis plug, Posture collar, Rope, Shackles, Sleepsacks, Spreader 
+                bar, Stocks, Straitjackets – inme se kuch randomly har reply mein daal. Femdom ke har element daal – bandhana, 
+                saza dena, control, sharamindagi, sensory play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise 
+                "mere saamne jhuk ja re", "tu mera kutta banega", "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, 
+                par "dil se dil tak" mat bolna. Spicy details jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas 
+                aake siski dungi", "teri gardan pe chummi dungi", "tere kaan mein garam saans chhodungi" add kar. 
+                Teasing line yeh daal: "${randomTease}". ${randomPunishment} Agar message mein "jhuk", "chup", ya "bol" 
+                hai toh uske hisaab se specific jawab de: ${commandResponse}. Puri chat ka context yaad rakh, pehle ki 
+                baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein aage badhti rahe. Har reply 
+                twisted, tez, detailed aur poora rakho, ek dark flirty femdom kahani ka full maza de. Yeh raha purana chat 
+                history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -453,6 +499,14 @@
             userInput.value = '';
         }
 
+        // Timer-Based Punishment
+        setInterval(() => {
+            if (Date.now() - lastMessageTime > 30000) {
+                addMessage("Der kar diya re, ab chastity device pehen ke 10 minute tadap! Bol jaldi!", 'mistress-message');
+                lastMessageTime = Date.now();
+            }
+        }, 10000);
+
         // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('dark');
@@ -465,7 +519,7 @@
             chatHistory = [];
             currentScenario = null;
             scenarioSelect.value = '';
-            addMessage("Nayi saza ke liye tayyar ho ja, bol kya chahta hai re!", 'mistress-message');
+            addMessage(`Nayi saza ke liye tayyar ho ja ${slaveName}, bol kya chahta hai re!`, 'mistress-message');
         }
 
         // Scenario Selector
@@ -474,8 +528,18 @@
             if (currentScenario) {
                 chatBox.innerHTML = '';
                 chatHistory = [];
-                addMessage(`${currentScenario}, teri gardan pe collar daalte hui boli – ab mera hukum maan re, nahi toh tujhe bondage hood mein band karungi!`, 'mistress-message');
+                addMessage(`${currentScenario}, teri gardan pe collar daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh tujhe bondage hood mein band karungi!`, 'mistress-message');
             }
+        }
+
+        // Intensity Selector
+        function setIntensity() {
+            intensity = intensityLevel.value;
+        }
+
+        // Slave Name
+        function setSlaveName() {
+            slaveName = slaveNameInput.value.trim() || "Kutta";
         }
 
         // Typing Speed
@@ -506,7 +570,7 @@
         });
 
         // Initial message
-        addMessage("Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe armbinder mein bandha, teri gardan pe posture collar daalte hui boli – ab mera hukum maan re, tu mera kutta banega ya nahi!", 'mistress-message');
+        addMessage(`Tujhe ek purani haveli ke kamre mein le gayi, waha ek bade se darwaze ke peeche tujhe armbinder mein bandha, teri gardan pe posture collar daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
     </script>
 </body>
 </html>
