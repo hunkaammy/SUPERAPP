@@ -159,8 +159,8 @@
             if (speak && className === 'mistress-message') {
                 const utterance = new SpeechSynthesisUtterance(message);
                 utterance.lang = 'hi-IN';
-                utterance.pitch = 0.8; // Low pitch seductive ke liye
-                utterance.rate = 0.9; // Slow bolne se thodi vibe
+                utterance.pitch = 0.7; // Aur low pitch sensual ke liye
+                utterance.rate = 0.85; // Thoda slow aur sultry
                 utterance.volume = 1;
 
                 const voices = window.speechSynthesis.getVoices();
@@ -201,16 +201,17 @@
 
             const prompt = `
                 Tu ek strict Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
-                ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse seductive, 
-                aggressive aur cruel tareeke se jawab de, reply ko ek kahani ka scene jaisa bana jaise tu slave 
-                ke saath kuch dark, flirty aur tez cheez kar rahi hai (misal ke liye "tujhe kursi pe bitha ke 
-                tere dono haath tight bandhungi, phir tere chehre pe haath pherungi"). Hinglish ke shabd jaise 
-                "dil se dil tak teri saza jati hai", "mere saamne jhuk ja re", "tu mera kutta banega", "mazze 
-                se tujhe tadpaungi" daal, aur thodi aur spicy aur vivid banane ke liye extra details jaise 
-                "teri aankhon mein dekhti hu", "tere kaan mein siski dungi" add kar. Puri chat ka context yaad 
-                rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana. Har reply naya, twisted, tez 
-                aur poora rakho, ek dark flirty kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb 
-                is message ka jawab pure Hinglish mein de.
+                ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse bahut 
+                zyada sensual, aggressive aur cruel tareeke se jawab de, reply ko ek kahani ka scene jaisa 
+                bana jaise tu slave ke saath kuch dark, flirty aur bhadkau cheez kar rahi hai (misal ke liye 
+                "tujhe kursi pe bitha ke tere dono haath tight bandhungi, phir tere gale pe ungliya pherungi"). 
+                Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", "mazze se tujhe 
+                tadpaungi" use kar, par "dil se dil tak" mat bolna. Aur sensual banane ke liye spicy details 
+                jaise "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", "teri gardan 
+                pe chummi dungi" add kar. Puri chat ka context yaad rakh, pehle ki baatein soch ke jawab 
+                logical aur judaa hua bana. Har reply naya, twisted, tez aur poora rakho, ek dark flirty 
+                kahani ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message ka 
+                jawab pure Hinglish mein de.
             `;
 
             try {
@@ -252,7 +253,7 @@
             if (e.key === 'Enter') sendMessage();
         });
 
-        addMessage("Tujhe kursi pe bitha ke tere dono haath tight bandhe, teri aankhon mein dekhti hui boli – ab bol re tu mera kutta hai ya nahi!", 'mistress-message', true);
+        addMessage("Tujhe kursi pe bitha ke tere dono haath tight bandhe, teri gardan pe ungliya pherte hui boli – ab bol re tu mera kutta hai ya nahi!", 'mistress-message', true);
     </script>
 </body>
 </html>
