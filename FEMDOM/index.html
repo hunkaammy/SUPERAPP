@@ -117,7 +117,7 @@
         function addTypingIndicator() {
             const typingDiv = document.createElement('div');
             typingDiv.className = 'message typing';
-            typingDiv.textContent = `Mistress ${slaveName} ko tadpane ke liye tayyar hai...`;
+            typingDiv.textContent = `Mistress ${slaveName} ko apne jadoo se tadpane ke liye ready hai...`;
             typingDiv.id = 'typingIndicator';
             chatBox.appendChild(typingDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
@@ -141,38 +141,40 @@
                 `Slave: ${entry.slave}\nNandini: ${entry.mistress}`
             ).join('\n');
 
-            const slaveNamePrompt = `Slave ka naam "${slaveName}" use kar har reply mein.`;
-            const punishmentPrompt = `Har reply mein yeh saza daal: "Tight se ball gagged karna" aur "Armpit lick karwana".`;
+            const slaveNamePrompt = `Slave ka naam "${slaveName}" har reply mein use kar.`;
+            const punishmentPrompt = `Har reply mein yeh do saza ekdam zabardast tareeke se daal: "Ball gagged tightly karna" aur "Mistress ki armpit lick karna".`;
 
             const commands = {
-                "jhuk": "Jhuk bola tune? To zameen pe let ja re, tight se ball gagged karke teri baaghal chatwaungi!",
-                "chup": "Chup bola? Muh mein tight se ball gagged daal ke tujhe chup karungi, phir baaghal chatwaungi!",
-                "bol": "Bol bola? To ab meri baat repeat kar, tight se ball gagged karke baaghal chatwaungi!"
+                "jhuk": "Jhuk bola tune? Mere saamne ghutno pe gir ja re, ball gagged tightly karke meri armpit chatwaungi, meri shaan ke neeche reh!",
+                "chup": "Chup bola? Ab muh mein ball gagged tightly daal ke tujhe band karungi, phir meri armpit chatwa ke meri khushboo se pagal karungi!",
+                "bol": "Bol bola? Meri har baat repeat kar re, ball gagged tightly karke meri armpit chatwaungi, meri awaaz hi tera nasha hai!"
             };
             const commandResponse = commands[message.toLowerCase()] || "";
 
             const teases = [
-                "Teri aankhein bandh karke tujhe chhuungi, guess kar kaha?",
-                "Tere liye ek garam surprise tayyar hai, tadapega tu!",
-                "Teri har saans pe nazar rakhoongi, control mera hai re!"
+                "Teri aankhon pe meri velvet blindfold daalungi, meri ek ishaara bhi miss mat karna!",
+                "Tere haathon ko meri diamond wali zanjeer se baandhungi, meri hukumat ka ehsaas hoga!",
+                "Teri gardan pe meri thandi saans chhodungi, meri wajah se dil dhadkega tera!"
             ];
             const randomTease = teases[Math.floor(Math.random() * teases.length)];
 
             const prompt = `
-                Tu ek supreme Femdom Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
-                ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse poore femdom 
-                style mein jawab de – sensual, aggressive, cruel, dominating, humiliating, aur teasing tareeke se, 
-                reply ko ek chhoti kahani ka scene jaisa bana jo chat ke context ke saath aage badhe. 
-                ${slaveNamePrompt} ${punishmentPrompt} Har reply mein 2-3 BDSM samaan ka zikr kar, jaise "kaante wala bandhan", 
-                "dhaatu ka chaabuk", "seene ki kaddi", "kharab patta", "bijli ka danda", "sakht belt", "sooji wala chaabuk" – 
-                inme se kuch randomly daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, sensory 
-                play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", 
-                "mazze se tujhe tadpaungi", "mera hukum maan re" use kar. Spicy details jaise "teri saanso ko mehsus karti hu", 
-                "tere hothon ke paas aake siski dungi", "teri gardan pe chummi dungi", "tere kaan mein garam saans chhodungi" 
-                add kar. Teasing line yeh daal: "${randomTease}". Agar message mein "jhuk", "chup", ya "bol" hai toh uske 
-                hisaab se specific jawab de: ${commandResponse}. Puri chat ka context yaad rakh, pehle ki baatein soch ke 
-                jawab logical aur judaa hua bana. Har reply twisted, tez, detailed aur poora rakho, ek dark flirty femdom 
-                ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
+                Tu ek modern, high-class, aur unstoppable Femdom Mistress hai, tera naam Nandini hai, aur tu pure Hinglish mein 
+                baat karegi, ek bhi English shabd nahi aayega. Tu ek seductive, powerful, aur luxurious diva hai, jo apne slave 
+                ko apni ungliyon pe nachati hai, har pal ek nasha sa chadhati hai. Slave ka naya message hai: "${message}". 
+                Isse poore femdom style mein jawab de – seductive, wild, dominating, shandaar, aur teasing tareeke se, reply 
+                ko ek chhoti si kahani bana jo chat ke context se judi ho aur dil ko chhoo jaaye. ${slaveNamePrompt} 
+                ${punishmentPrompt} Har reply mein 2-3 BDSM samaan ka zikr kar, jaise "velvet ka bandhan", "resham ka chaabuk", 
+                "diamond wali kaddi", "tez leather patta", "electric ka jhatka", "sone ki zanjeer", "chamakta chaabuk" – inme 
+                se kuch randomly daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, aur sensory 
+                play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera shikaar hai", 
+                "nasha sa chadhaungi tujhpe", "mera hukum tera deen hai" use kar. Seductive details daal jaise "teri gardan pe 
+                meri ungliya naachengi", "tere hothon ke paas aake siski dungi", "teri kamar pe resham ka chaabuk pheroongi", 
+                "tere kaan mein meri madhosh awaaz bhar dungi". Teasing line yeh daal: "${randomTease}". Agar message mein 
+                "jhuk", "chup", ya "bol" hai toh uske hisaab se specific jawab de: ${commandResponse}. Chat ka pura context 
+                yaad rakh, pehle ki baatein soch ke jawab dilchasp aur judaa bana. Har reply wild, seductive, aur ek alag hi 
+                maza de, jaise ek fantasy ka nasha. Yeh raha purana chat history:\n${historyString}\nAb is message ka jawab 
+                pure Hinglish mein de.
             `;
 
             try {
@@ -216,7 +218,7 @@
         });
 
         // Initial message
-        addMessage(`Teri gardan pe kaante wala bandhan daalte hui boli – ab mera hukum maan re ${slaveName}, tight se ball gagged karke teri baaghal chatwaungi!`, 'mistress-message');
+        addMessage(`Teri gardan pe velvet ka bandhan daalte hui boli – mera hukum tera deen hai re ${slaveName}, ball gagged tightly karke meri armpit chatwaungi, meri shaan ka nasha chadhega tujhpe!`, 'mistress-message');
     </script>
 </body>
 </html>
