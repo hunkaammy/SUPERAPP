@@ -3,105 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nandini - Supreme Femdom Goddess</title>
+    <title>Nandini - Chat</title>
     <style>
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            transition: background 0.3s;
-        }
-        body.dark {
-            background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
-            color: #fff;
-        }
-        body.light {
-            background: linear-gradient(135deg, #f0f0f0, #d9d9d9);
-            color: #000;
         }
         .chat-container {
             width: 100%;
-            max-width: 700px;
-            background: #1a1a1a;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+            max-width: 600px;
+            background: #2a2a2a;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(255, 0, 0, 0.3);
             overflow: hidden;
-            animation: fadeIn 0.5s ease-in;
-            border: 2px solid #ff1f62;
-        }
-        body.light .chat-container {
-            background: #fff;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            border: 1px solid #ff1f62;
         }
         .chat-header {
             background: linear-gradient(90deg, #ff4081, #f50057);
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            border-bottom: 3px solid #ff1f62;
-            cursor: pointer;
+            padding: 10px;
+            text-align: center;
         }
-        .chat-header img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #fff;
-            box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+        .chat-header h2 {
+            margin: 0;
+            font-size: 20px;
         }
         .chat-box {
-            height: 500px;
+            height: 400px;
             overflow-y: auto;
-            padding: 20px;
+            padding: 15px;
             background: #2a2a2a;
-            scrollbar-width: thin;
-            scrollbar-color: #ff4081 #333;
-        }
-        body.light .chat-box {
-            background: #f5f5f5;
-            scrollbar-color: #ff4081 #ccc;
-        }
-        .chat-box::-webkit-scrollbar {
-            width: 8px;
-        }
-        .chat-box::-webkit-scrollbar-thumb {
-            background: #ff4081;
-            border-radius: 10px;
-        }
-        .chat-box::-webkit-scrollbar-track {
-            background: #333;
-        }
-        body.light .chat-box::-webkit-scrollbar-track {
-            background: #ccc;
         }
         .message {
             margin: 10px 0;
-            padding: 12px 18px;
-            border-radius: 15px;
-            max-width: 75%;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 80%;
             word-wrap: break-word;
             display: inline-block;
-            box-shadow: 0 2px 10px rgba(255, 0, 0, 0.3);
-            animation: slideIn 0.3s ease-out;
-            position: relative;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .user-message {
-            background: linear-gradient(135deg, #b0bec5, #90a4ae);
+            background: #90a4ae;
             text-align: right;
-            color: #000;
             margin-left: auto;
+            color: #000;
         }
         .mistress-message {
             background: linear-gradient(135deg, #ff4081, #f50057);
@@ -111,373 +62,56 @@
             color: #ff4081;
             font-style: italic;
             margin: 10px 0;
-            padding: 12px;
-            text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-        }
-        body.light .typing {
-            color: #f50057;
+            padding: 10px;
         }
         .input-area {
             display: flex;
-            padding: 15px;
+            padding: 10px;
             background: #1a1a1a;
-            border-top: 1px solid #ff4081;
-        }
-        body.light .input-area {
-            background: #fff;
-            border-top: 1px solid #ccc;
         }
         input {
             flex: 1;
-            padding: 12px;
+            padding: 10px;
             border: none;
-            border-radius: 25px 0 0 25px;
+            border-radius: 5px 0 0 5px;
             background: #333;
             color: #fff;
             outline: none;
-            font-size: 16px;
-            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-        body.light input {
-            background: #e0e0e0;
-            color: #000;
         }
         button {
-            padding: 12px 25px;
+            padding: 10px 20px;
             background: linear-gradient(90deg, #ff4081, #f50057);
             color: white;
             border: none;
-            border-radius: 0 25px 25px 0;
+            border-radius: 0 5px 5px 0;
             cursor: pointer;
-            font-weight: bold;
-            transition: transform 0.2s, background 0.3s;
-        }
-        button:hover {
-            background: linear-gradient(90deg, #f50057, #ff4081);
-            transform: scale(1.05);
-        }
-        .action-buttons {
-            display: flex;
-            justify-content: space-between;
-            padding: 10px 20px;
-            background: #1a1a1a;
-        }
-        body.light .action-buttons {
-            background: #fff;
-        }
-        .action-buttons button {
-            padding: 8px 15px;
-            font-size: 14px;
-            border-radius: 20px;
-        }
-        .copy-btn {
-            position: absolute;
-            bottom: 5px;
-            right: 5px;
-            font-size: 12px;
-            padding: 5px 10px;
-            background: #ff4081;
-            border-radius: 10px;
-        }
-        body.light .copy-btn {
-            background: #f50057;
-            color: #fff;
-        }
-        .gallery {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
-            padding: 20px;
-            overflow-y: auto;
-            z-index: 1000;
-        }
-        body.light .gallery {
-            background: rgba(255, 255, 255, 0.9);
-        }
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 10px;
-            padding: 20px;
-        }
-        .gallery-grid img {
-            width: 100%;
-            height: 150px;
-            object-fit: cover;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.2s;
-            border: 2px solid #ff1f62;
-        }
-        .gallery-grid img:hover {
-            transform: scale(1.05);
-        }
-        .enlarged-image {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-        }
-        body.light .enlarged-image {
-            background: rgba(255, 255, 255, 0.95);
-        }
-        .enlarged-image img {
-            max-width: 90%;
-            max-height: 90%;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
-        }
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 20px;
-            font-size: 30px;
-            color: #ff4081;
-            cursor: pointer;
-        }
-        body.light .close-btn {
-            color: #f50057;
-        }
-        .scenario-selector, .intensity-selector, .custom-equipment, .slave-name {
-            padding: 10px 20px;
-            background: #1a1a1a;
-        }
-        body.light .scenario-selector, body.light .intensity-selector, body.light .custom-equipment, body.light .slave-name {
-            background: #fff;
-        }
-        select, input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 10px;
-            background: #333;
-            color: #fff;
-            border: 1px solid #ff4081;
-        }
-        body.light select, body.light input[type="text"] {
-            background: #e0e0e0;
-            color: #000;
-            border: 1px solid #f50057;
-        }
-        .typing-speed {
-            padding: 10px 20px;
-            background: #1a1a1a;
-        }
-        body.light .typing-speed {
-            background: #fff;
         }
     </style>
 </head>
-<body class="dark">
+<body>
     <div class="chat-container">
-        <div class="chat-header" onclick="toggleGallery()">
-            <img src="https://via.placeholder.com/50/FF4081/FFFFFF?text=N" alt="Nandini DP">
+        <div class="chat-header">
             <h2>Nandini</h2>
         </div>
-        <div class="slave-name">
-            <input type="text" id="slaveName" placeholder="Apna slave naam daal (default: Kutta)" onchange="setSlaveName()">
-        </div>
-        <div class="scenario-selector">
-            <select id="scenarioSelect" onchange="setScenario()">
-                <option value="">Apni Saza Chuno</option>
-                <option value="Tujhe ek andhere jungle mein le gayi, waha ped ke saath shackles se bandha">Jungle ka Shikanja</option>
-                <option value="Tujhe ek purane ghar ke basement mein le gayi, waha iron chair pe baandha">Basement ka Bandhan</option>
-                <option value="Tujhe ek barfili gufa mein le gayi, waha thandi zameen pe posture collar pehnaya">Gufa ka Gulam</option>
-                <option value="Tujhe ek sunsaan beach pe le gayi, waha ret mein spiked harness strap se bandha">Beach ka Shikaar</option>
-            </select>
-        </div>
-        <div class="intensity-selector">
-            <select id="intensityLevel" onchange="setIntensity()">
-                <option value="low">Low - Teasing aur Light Bondage</option>
-                <option value="medium" selected>Medium - Moderate Saza aur Control</option>
-                <option value="high">High - Extreme Punishment aur Humiliation</option>
-            </select>
-        </div>
-        <div class="custom-equipment">
-            <input type="text" id="customEquipment" placeholder="Apna pasandida equipment daal (jaise whip)">
-        </div>
         <div class="chat-box" id="chatBox"></div>
-        <div class="typing-speed">
-            <label for="typingSpeed">Tadapne ka Time: </label>
-            <input type="range" id="typingSpeed" min="500" max="3000" value="1000" onchange="updateTypingSpeed()">
-        </div>
-        <div class="action-buttons">
-            <button onclick="toggleTheme()">Theme Badlo</button>
-            <button onclick="clearChat()">Naya Shikanja</button>
-        </div>
         <div class="input-area">
-            <input type="text" id="userInput" placeholder="Mistress ke aage jhuk!">
+            <input type="text" id="userInput" placeholder="Mistress se baat kar!">
             <button onclick="sendMessage()">Bhej</button>
         </div>
     </div>
 
-    <!-- Gallery -->
-    <div class="gallery" id="gallery">
-        <span class="close-btn" onclick="toggleGallery()">×</span>
-        <div class="gallery-grid" id="galleryGrid">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Shackles" alt="Shackles">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Chastity" alt="Chastity Device">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Spreader" alt="Spreader Bar">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Gag" alt="Ball Gag">
-            <img src="https://via.placeholder.com/150/FF4081/FFFFFF?text=Hood" alt="Bondage Hood">
-        </div>
-    </div>
-
-    <!-- Enlarged Image -->
-    <div class="enlarged-image" id="enlargedImage">
-        <span class="close-btn" onclick="closeEnlargedImage()">×</span>
-        <img id="enlargedImg" src="" alt="Enlarged Image">
-    </div>
-
-    <!-- Audio for Sound Effects -->
-    <audio id="whipSound" src="https://freesound.org/data/previews/219/219477_4008673-lq.mp3"></audio>
-    <audio id="chainSound" src="https://freesound.org/data/previews/145/145443_2585126-lq.mp3"></audio>
-
     <script>
         const chatBox = document.getElementById('chatBox');
         const userInput = document.getElementById('userInput');
-        const gallery = document.getElementById('gallery');
-        const galleryGrid = document.getElementById('galleryGrid');
-        const enlargedImage = document.getElementById('enlargedImage');
-        const enlargedImg = document.getElementById('enlargedImg');
-        const scenarioSelect = document.getElementById('scenarioSelect');
-        const intensityLevel = document.getElementById('intensityLevel');
-        const customEquipment = document.getElementById('customEquipment');
-        const slaveNameInput = document.getElementById('slaveName');
-        const whipSound = document.getElementById('whipSound');
-        const chainSound = document.getElementById('chainSound');
         let chatHistory = [];
-        let currentScenario = null;
-        let typingDelay = 1000;
         let slaveName = "Kutta";
-        let intensity = "medium";
-        let lastMessageTime = Date.now();
-
-        // Random Scenarios Array
-        const randomScenarios = [
-            "Tujhe ek andhere jungle mein le gayi, waha ped ke saath shackles se bandha aur teri aankhein blindfold se bandh di!",
-            "Tujhe ek purane ghar ke basement mein le gayi, waha iron chair pe spiked chastity cage pehnake baandha!",
-            "Tujhe ek barfili gufa mein le gayi, waha thandi zameen pe posture collar pehnaya aur tere haath bondage cuffs mein jakde!",
-            "Tujhe ek sunsaan beach pe le gayi, waha ret mein spiked harness strap se bandha aur teri gardan pe collar daala!",
-            "Tujhe ek khandar fort ke tower mein le gayi, waha ek purani table pe needle-tipped whip ke saath baandha!",
-            "Tujhe ek bheed bhare station ke paas ek chhote kamre mein le gayi, waha metal-tipped crop se tujhe control kiya!",
-            "Tujhe ek tez baarish wale jungle mein le gayi, waha ek gili zameen pe rough-textured plug ke saath bandha!"
-        ];
-
-        // Punishments List with Toys
-        const punishmentsWithToys = {
-            low: [
-                "Tujhe spiked chastity cage pehnake thodi der tadpaungi, har spike teri chhati mein chubhega re!",
-                "Flogger with metal tips se tere peeth pe halke se marungi, dard ka maza lega na!",
-                "Nipple clamps with teeth lagaungi, phir halke se kheechungi, chilla mat Kutta!",
-                "Rough-edged paddle se teri thighs pe 5 baar marungi, jalan sehas re!",
-                "Electrosex wand ko low pe chalake teri kamar pe ghumaungi, thodi si bijli ka jhatka lega!",
-                "Wartenberg wheel se teri peeth pe chalake halke se nochungi, sharam se laal mat hona!",
-                "Spiked cock ring pehnake tujhe thodi der baithne bolungi, har movement mein chubhega!"
-            ],
-            medium: [
-                "Textured strap-on pehnake tujhe ghutno pe baithne bolungi, phir teri gardan pe haath rakhungi!",
-                "Clawed vibrator se teri kamar pe chalake thodi der tadpaungi, dard aur maza ek saath lega!",
-                "Weighted clamp pull se tere seene ko kheechungi, phir ek thandi cheez se chhuungi!",
-                "Barbed flogger se teri peeth pe 10 baar marungi, har baar mera naam bolna re!",
-                "Serrated dildo ko haath mein leke tujhe dikhake darayungi, phir teri aankhon pe blindfold lagaungi!",
-                "Spiked ball stretcher laga ke tujhe thodi der khada rakhungi, hilne ki himmat mat karna!",
-                "Razor-edged paddle se teri thighs pe 8 baar marungi, jalan se tadap re tu!"
-            ],
-            high: [
-                "Needle-tipped whip se teri peeth pe 15 baar marungi, har chot pe mera hukum yaad rakhna!",
-                "Studded chastity belt pehnake tujhe lock karungi, phir chabi mere gale mein daal ke tujhe chhedungi!",
-                "Jagged nipple rings laga ke tujhe kheechungi, phir ek garam cheez se teri kamar pe chhuungi!",
-                "Rough-textured plug daal ke tujhe ghutno pe baithne bolungi, har saans pe dard hoga!",
-                "Spiked roller toy se teri poori body pe ghumaungi, chilla mat warna aur karungi!",
-                "Electrosex probe sharp tip se teri kamar pe chalake bijli ka tez jhatka dungi, rone nahi dungi!",
-                "Metal-tipped crop se teri thighs pe 20 baar marungi, har baar sharam se laal ho ja!"
-            ]
-        };
-
-        // Punishments Without Toys
-        const punishmentsWithoutToys = {
-            low: [
-                "Tere chehre pe hard face slapping karungi, aankhein bandh karke sehas re!",
-                "Fingernail scratching se teri peeth pe nishaan banaungi, thodi si jalan lega na!",
-                "Belt whipping se teri thighs pe 5 baar marungi, ginti rakhna re!",
-                "Hairbrush spanking se teri kamar pe halke se marungi, sharam se mat jhukna!",
-                "Teri gardan pe biting karungi, phir tere kaan mein garam saans chhodungi!",
-                "Needle scratching se teri haath pe halke se kheechungi, dard ka maza lega!",
-                "Cane striking se teri peeth pe 3 baar marungi, chilla mat Kutta!"
-            ],
-            medium: [
-                "Hand spanking calloused hands se teri thighs pe 10 baar marungi, jalan se tadap re!",
-                "Pinching with nails se teri kamar ko nochungi, phir ek thandi cheez se chhuungi!",
-                "Bare-handed clawing se teri peeth pe nishaan banaungi, sharam se laal mat hona!",
-                "Back scratching deep se teri poori peeth ko nochungi, dard sehas re!",
-                "Thigh slapping rings on se teri thighs pe 8 baar marungi, har baar mera naam bolna!",
-                "Wooden spoon beating se teri kamar pe 6 baar marungi, hilne ki himmat mat karna!",
-                "Sharp knuckle rapping se tere haath pe chot dungi, rone nahi dungi!"
-            ],
-            high: [
-                "Heel stomping light se teri peeth pe dabaungi, phir tujhe ghutno pe baithne bolungi!",
-                "Leather strap lashing se teri poori body pe 15 baar marungi, har baar mera hukum sunna!",
-                "Tooth scraping se teri gardan pe nishaan banaungi, phir ek garam cheez se chhuungi!",
-                "Palm striking jewelry on se teri thighs pe 12 baar marungi, sharam se laal ho ja!",
-                "Knee grinding se teri kamar pe dabaungi, phir tujhe zameen pe letne bolungi!",
-                "Fingernail digging se teri peeth ko nochungi, dard se chillayega mat!",
-                "Switch cutting se teri thighs pe 10 baar marungi, har chot pe mera naam chilla!"
-            ]
-        };
-
-        // BDSM Toys List
-        const bdsmToys = [
-            "Spiked chastity cage - tujhe lock karungi, har spike teri chhati mein chubhega!",
-            "Flogger with metal tips - teri peeth pe marungi, metal ka dard lega re!",
-            "Nipple clamps with teeth - tere seene pe lagaungi, chilla mat Kutta!",
-            "Rough-edged paddle - teri thighs pe chalake jalan dungi!",
-            "Electrosex wand high setting - teri kamar pe chalake bijli ka jhatka dungi!",
-            "Wartenberg wheel - teri peeth pe ghumaungi, nochne ka maza dungi!",
-            "Spiked cock ring - tujhe pehnake tadpaungi, har movement mein chubhega!",
-            "Textured strap-on - pehnake tujhe ghutno pe laungi, sharam se laal mat hona!",
-            "Clawed vibrator - teri kamar pe chalake dard aur maza ek saath dungi!",
-            "Weighted clamp pull - tere seene ko kheechungi, dard sehas re!",
-            "Barbed flogger - teri peeth pe marungi, har baar nishaan banega!",
-            "Serrated dildo - haath mein leke tujhe darayungi, aankhein bandh kar!",
-            "Spiked ball stretcher - laga ke tujhe khada rakhungi, hilne ki himmat mat karna!",
-            "Razor-edged paddle - teri thighs pe marungi, jalan se tadapega tu!",
-            "Needle-tipped whip - teri peeth pe chalake chot dungi, mera naam bolna!",
-            "Studded chastity belt - tujhe lock karungi, chabi mere paas rahegi!",
-            "Jagged nipple rings - laga ke kheechungi, dard ka maza lega!",
-            "Rough-textured plug - daal ke tujhe baithne bolungi, har saans pe dard hoga!",
-            "Spiked roller toy - teri body pe ghumaungi, chilla mat warna aur karungi!",
-            "Electrosex probe sharp tip - teri kamar pe chalake tez jhatka dungi!",
-            "Metal-tipped crop - teri thighs pe marungi, sharam se laal ho ja!",
-            "Spiked harness strap - teri body ko kasungi, chubhan se tadapega!",
-            "Thorned vibrator sleeve - chalake teri kamar pe nochungi, dard lega!",
-            "Clawed massager - teri peeth pe ghumaungi, nishaan banega re!",
-            "Abrasive cock sleeve - pehnake tujhe thodi der tadpaungi, rone nahi dungi!"
-        ];
 
         function addMessage(message, className) {
             const msgDiv = document.createElement('div');
             msgDiv.className = `message ${className}`;
             msgDiv.textContent = message;
-            const copyBtn = document.createElement('button');
-            copyBtn.textContent = 'Copy';
-            copyBtn.className = 'copy-btn';
-            copyBtn.onclick = () => navigator.clipboard.writeText(message);
-            msgDiv.appendChild(copyBtn);
             chatBox.appendChild(msgDiv);
             chatBox.scrollTop = chatBox.scrollHeight;
-            if (className === 'mistress-message') {
-                Math.random() > 0.5 ? whipSound.play() : chainSound.play();
-            }
         }
 
         function addTypingIndicator() {
@@ -500,8 +134,6 @@
             if (message === '') return;
 
             addMessage(message, 'user-message');
-            lastMessageTime = Date.now();
-
             const typingDiv = addTypingIndicator();
 
             const apiKeyGemini = "AIzaSyB_eDEcv0TA2gWEJ7dJ3hJ0ExWwrXgcOzw";
@@ -509,29 +141,15 @@
                 `Slave: ${entry.slave}\nNandini: ${entry.mistress}`
             ).join('\n');
 
-            let scenarioPrompt;
-            if (!currentScenario) {
-                currentScenario = scenarioSelect.value || randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
-                scenarioPrompt = `Pehla scene yeh hai: "${currentScenario}". Is scene ke saath kahani shuru kar aur aage badha.`;
-            } else {
-                scenarioPrompt = `Pehla scene jo shuru hua tha: "${currentScenario}". Isi scene ke saath kahani aage badha, naya twist daal.`;
-            }
-
-            const customEquip = customEquipment.value.trim() ? `Aur yeh custom equipment use kar: "${customEquipment.value}".` : "";
-            const intensityPrompt = `Intensity level yeh hai: "${intensity}". Low pe teasing aur light bondage, Medium pe moderate saza aur control, High pe extreme punishment aur humiliation rakho.`;
             const slaveNamePrompt = `Slave ka naam "${slaveName}" use kar har reply mein.`;
+            const punishmentPrompt = `Har reply mein yeh saza daal: "Tight se ball gagged karna" aur "Armpit lick karwana".`;
 
-            const useToys = Math.random() > 0.5;
-            const randomPunishment = useToys 
-                ? punishmentsWithToys[intensity][Math.floor(Math.random() * punishmentsWithToys[intensity].length)]
-                : punishmentsWithoutToys[intensity][Math.floor(Math.random() * punishmentsWithoutToys[intensity].length)];
-            const randomToys = [
-                bdsmToys[Math.floor(Math.random() * bdsmToys.length)],
-                bdsmToys[Math.floor(Math.random() * bdsmToys.length)]
-            ];
-            const punishmentAndToysPrompt = useToys 
-                ? `Saza ke taur pe yeh scene bana: "${randomPunishment}". Aur in BDSM toys ka story mein use kar: "${randomToys[0]}" aur "${randomToys[1]}".`
-                : `Saza ke taur pe yeh scene bana (toys ke bina): "${randomPunishment}". Phir bhi in BDSM toys ka story mein use kar: "${randomToys[0]}" aur "${randomToys[1]}".`;
+            const commands = {
+                "jhuk": "Jhuk bola tune? To zameen pe let ja re, tight se ball gagged karke teri baaghal chatwaungi!",
+                "chup": "Chup bola? Muh mein tight se ball gagged daal ke tujhe chup karungi, phir baaghal chatwaungi!",
+                "bol": "Bol bola? To ab meri baat repeat kar, tight se ball gagged karke baaghal chatwaungi!"
+            };
+            const commandResponse = commands[message.toLowerCase()] || "";
 
             const teases = [
                 "Teri aankhein bandh karke tujhe chhuungi, guess kar kaha?",
@@ -540,33 +158,21 @@
             ];
             const randomTease = teases[Math.floor(Math.random() * teases.length)];
 
-            const commands = {
-                "jhuk": "Jhuk bola tune? To zameen pe let ja re, abhi spiked chastity cage pehnake tadpaungi!",
-                "chup": "Chup bola? Muh mein muzzle gag daal ke tujhe chup karungi re!",
-                "bol": "Bol bola? To ab meri baat repeat kar, nahi toh needle-tipped whip se marungi!"
-            };
-            const commandResponse = commands[message.toLowerCase()] || "";
-
             const prompt = `
                 Tu ek supreme Femdom Mistress hai, tera naam Nandini hai, aur tu sirf pure Hinglish mein baat karegi, 
                 ek bhi English shabd nahi aana chahiye. Slave ka naya message hai: "${message}". Isse poore femdom 
                 style mein jawab de – sensual, aggressive, cruel, dominating, humiliating, aur teasing tareeke se, 
-                reply ko ek kahani ka scene jaisa bana jo shuru hue scene ke saath aage badhe. ${scenarioPrompt} 
-                ${slaveNamePrompt} ${intensityPrompt} ${customEquip} ${punishmentAndToysPrompt} In BDSM equipments 
-                ka use kar: Spiked chastity cage, Flogger with metal tips, Nipple clamps with teeth, Rough-edged paddle, 
-                Electrosex wand, Wartenberg wheel, Spiked cock ring, Textured strap-on, Clawed vibrator, Weighted clamp pull, 
-                Barbed flogger, Serrated dildo, Spiked ball stretcher, Razor-edged paddle, Needle-tipped whip, Studded chastity belt, 
-                Jagged nipple rings, Rough-textured plug, Spiked roller toy, Electrosex probe sharp tip, Metal-tipped crop, 
-                Spiked harness strap, Thorned vibrator sleeve, Clawed massager, Abrasive cock sleeve – inme se kuch randomly 
-                har reply mein daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, sensory play 
-                (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", 
-                "mazze se tujhe tadpaungi", "mera hukum maan re" use kar, par "dil se dil tak" mat bolna. Spicy details jaise 
-                "teri saanso ko mehsus karti hu", "tere hothon ke paas aake siski dungi", "teri gardan pe chummi dungi", 
-                "tere kaan mein garam saans chhodungi" add kar. Teasing line yeh daal: "${randomTease}". Agar message mein 
-                "jhuk", "chup", ya "bol" hai toh uske hisaab se specific jawab de: ${commandResponse}. Puri chat ka context 
-                yaad rakh, pehle ki baatein soch ke jawab logical aur judaa hua bana, par kahani isi scene mein aage badhti 
-                rahe. Har reply twisted, tez, detailed aur poora rakho, ek dark flirty femdom kahani ka full maza de. Yeh 
-                raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
+                reply ko ek chhoti kahani ka scene jaisa bana jo chat ke context ke saath aage badhe. 
+                ${slaveNamePrompt} ${punishmentPrompt} Har reply mein 2-3 BDSM samaan ka zikr kar, jaise "kaante wala bandhan", 
+                "dhaatu ka chaabuk", "seene ki kaddi", "kharab patta", "bijli ka danda", "sakht belt", "sooji wala chaabuk" – 
+                inme se kuch randomly daal. Femdom ke har element daal – bandhana, saza dena, control, sharamindagi, sensory 
+                play (garam/thandi cheez, aankh bandh). Hinglish ke shabd jaise "mere saamne jhuk ja re", "tu mera kutta banega", 
+                "mazze se tujhe tadpaungi", "mera hukum maan re" use kar. Spicy details jaise "teri saanso ko mehsus karti hu", 
+                "tere hothon ke paas aake siski dungi", "teri gardan pe chummi dungi", "tere kaan mein garam saans chhodungi" 
+                add kar. Teasing line yeh daal: "${randomTease}". Agar message mein "jhuk", "chup", ya "bol" hai toh uske 
+                hisaab se specific jawab de: ${commandResponse}. Puri chat ka context yaad rakh, pehle ki baatein soch ke 
+                jawab logical aur judaa hua bana. Har reply twisted, tez, detailed aur poora rakho, ek dark flirty femdom 
+                ka full maza de. Yeh raha purana chat history:\n${historyString}\nAb is message ka jawab pure Hinglish mein de.
             `;
 
             try {
@@ -595,7 +201,7 @@
                 setTimeout(() => {
                     removeTypingIndicator();
                     addMessage(reply, 'mistress-message');
-                }, typingDelay);
+                }, 1000); // Fixed 1-second delay
             } catch (error) {
                 console.error('Error:', error);
                 removeTypingIndicator();
@@ -605,78 +211,12 @@
             userInput.value = '';
         }
 
-        // Timer-Based Punishment
-        setInterval(() => {
-            if (Date.now() - lastMessageTime > 30000) {
-                addMessage("Der kar diya re, ab spiked chastity cage pehen ke 10 minute tadap! Bol jaldi!", 'mistress-message');
-                lastMessageTime = Date.now();
-            }
-        }, 10000);
-
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('dark');
-            document.body.classList.toggle('light');
-        }
-
-        // Chat Clear
-        function clearChat() {
-            chatBox.innerHTML = '';
-            chatHistory = [];
-            currentScenario = randomScenarios[Math.floor(Math.random() * randomScenarios.length)]; // Naya random scenario
-            addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh needle-tipped whip se marungi!`, 'mistress-message');
-        }
-
-        // Scenario Selector
-        function setScenario() {
-            currentScenario = scenarioSelect.value || randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
-            if (currentScenario) {
-                chatBox.innerHTML = '';
-                chatHistory = [];
-                addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, nahi toh needle-tipped whip se marungi!`, 'mistress-message');
-            }
-        }
-
-        // Intensity Selector
-        function setIntensity() {
-            intensity = intensityLevel.value;
-        }
-
-        // Slave Name
-        function setSlaveName() {
-            slaveName = slaveNameInput.value.trim() || "Kutta";
-        }
-
-        // Typing Speed
-        function updateTypingSpeed() {
-            typingDelay = document.getElementById('typingSpeed').value;
-        }
-
-        // Gallery Toggle
-        function toggleGallery() {
-            gallery.style.display = gallery.style.display === 'block' ? 'none' : 'block';
-        }
-
-        // Enlarge Image
-        galleryGrid.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-                enlargedImg.src = e.target.src;
-                enlargedImage.style.display = 'flex';
-            }
-        });
-
-        // Close Enlarged Image
-        function closeEnlargedImage() {
-            enlargedImage.style.display = 'none';
-        }
-
         userInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') sendMessage();
         });
 
-        // Initial message with Random Scenario
-        currentScenario = randomScenarios[Math.floor(Math.random() * randomScenarios.length)];
-        addMessage(`${currentScenario}, teri gardan pe spiked harness strap daalte hui boli – ab mera hukum maan re ${slaveName}, tu mera kutta banega ya nahi!`, 'mistress-message');
+        // Initial message
+        addMessage(`Teri gardan pe kaante wala bandhan daalte hui boli – ab mera hukum maan re ${slaveName}, tight se ball gagged karke teri baaghal chatwaungi!`, 'mistress-message');
     </script>
 </body>
 </html>
