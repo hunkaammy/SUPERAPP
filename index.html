@@ -1,278 +1,149 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎶 Love Songs TV</title>
+  <title>Hindi Pop 2024-2025 Video Player</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
+    video {
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      background: black;
-    }
-    #player {
-      width: 100vw;
-      height: 100vh;
       position: fixed;
       top: 0;
       left: 0;
-      object-fit: contain;
-      background: black;
+      z-index: 1000;
+      display: none; /* Hidden until play button is clicked */
+      object-fit: cover; /* Ensure video fills screen without distortion */
     }
-    #next-player {
-      display: none;
+    button {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      padding: 20px 40px;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 1001;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
     }
-    @media screen and (orientation: portrait) and (max-width: 768px) {
-      #player {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        object-fit: contain;
-      }
-      body::before {
-        content: "Please rotate your device to landscape for the best experience.";
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        color: white;
-        font-size: 18px;
-        text-align: center;
-        z-index: 1000;
-        display: block;
-      }
-    }
-    @media screen and (orientation: landscape) {
-      body::before {
-        display: none;
-      }
+    button:hover {
+      background-color: #0056b3;
     }
   </style>
 </head>
 <body>
-  <div id="player"></div>
+  <video id="player"></video>
+  <button id="playButton">Play</button>
 
   <script>
-    const tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
-
-    let currentPlayer;
-    let nextPlayer;
-    let playersReady = 0;
-
-    const broadcastStartUTC = new Date("2025-04-01T08:00:00Z").getTime();
-
-    const playlist = [
-      { id: "-2RAq5o5pwc", title: "Jhol – Coke Studio Pakistan Season 15", artist: "Maanu & Annural Khalid", duration: 300 },
-      { id: "tmAXbPGOf0Q", title: "Teri Meri Ladayi", artist: "Maninder Buttar feat. Tania", duration: 241 },
-      { id: "FVPdfPhXmR0", title: "Yaarr Ni Milyaa", artist: "Hardy Sandhu", duration: 320 },
-      { id: "FVPdfPhXmR0", title: "Yaarr Ni Milyaa", artist: "Hardy Sandhu", duration: 320 },
-      { id: "I1nX5EuvwzE", title: "Shubh - Elevated", artist: "Shubh", duration: 229 },
-      { id: "V5En3Ks3OjE", title: "Kale Je Libaas Di ", artist: "KAKA", duration: 275 },
-      { id: "AZmAgoir1Tc", title: "Feelings ", artist: "SUMIT GOSWAMI", duration: 295 }
+    const player = document.getElementById('player');
+    const playButton = document.getElementById('playButton');
+    const originalPlaylist = [
+      { 
+        title: "Nadaaniyan | Akshath Acharya", 
+        url: "https://pagalworld.video/files/download/id/2379", 
+        duration: 171 
+      },
+      { 
+        title: "Attach | Sidhu Moose Wala ft Fredo", 
+        url: "https://pagalworld.video/files/download/type/320/id/2303", 
+        duration: 306 
+      }
     ];
 
+    // Deterministic shuffle function using a seed
     function seededShuffle(array, seed) {
-      const result = [...array];
-      let m = result.length, t, i;
-      while (m) {
-        i = Math.floor(seededRandom(seed + m) * m--);
-        t = result[m];
-        result[m] = result[i];
-        result[i] = t;
+      const newArray = [...array];
+      let m = newArray.length, t, i;
+      function seededRandom() {
+        const x = Math.sin(seed++) * 10000;
+        return x - Math.floor(x);
       }
-      return result;
+      while (m) {
+        i = Math.floor(seededRandom() * m--);
+        t = newArray[m];
+        newArray[m] = newArray[i];
+        newArray[i] = t;
+      }
+      return newArray;
     }
 
-    function seededRandom(seed) {
-      const x = Math.sin(seed) * 10000;
-      return x - Math.floor(x);
+    // Use startTime as the seed for consistent shuffling across users
+    const startTime = new Date("2025-04-20T00:00:00Z").getTime();
+    const playlist = seededShuffle(originalPlaylist, startTime / 1000);
+    const totalDuration = playlist.reduce((sum, song) => sum + song.duration, 0); // 477 seconds
+    let currentSongUrl = '';
+    let hasEnteredFullscreen = false;
+
+    function enterFullScreen() {
+      if (hasEnteredFullscreen) return;
+      try {
+        if (player.requestFullscreen) {
+          player.requestFullscreen();
+        } else if (player.webkitRequestFullscreen) {
+          player.webkitRequestFullscreen();
+        } else if (player.msRequestFullscreen) {
+          player.msRequestFullscreen();
+        }
+        console.log("Full Screen Requested");
+        hasEnteredFullscreen = true;
+      } catch (e) {
+        console.error("Full Screen Error:", e);
+      }
     }
 
-    function getTotalDuration() {
-      return playlist.reduce((sum, song) => sum + song.duration, 0);
-    }
-
-    function getCurrentSongAndTime() {
-      const nowUTC = Date.now();
-      const elapsed = Math.floor((nowUTC - broadcastStartUTC) / 1000);
-      const totalDuration = getTotalDuration();
-      const cycleTime = elapsed % totalDuration;
-      const cycleNumber = Math.floor(elapsed / totalDuration);
-      const seed = cycleNumber;
-      const shuffledPlaylist = seededShuffle(playlist, seed);
+    function syncVideo() {
+      const now = Date.now();
+      const elapsedSeconds = (now - startTime) / 1000;
+      const playlistPosition = elapsedSeconds % totalDuration;
 
       let accumulatedTime = 0;
-      for (let i = 0; i < shuffledPlaylist.length; i++) {
-        const song = shuffledPlaylist[i];
-        if (cycleTime < accumulatedTime + song.duration) {
-          return { song, time: cycleTime - accumulatedTime, index: i, playlist: shuffledPlaylist };
-        }
-        accumulatedTime += song.duration;
-      }
-      return { song: shuffledPlaylist[0], time: 0, index: 0, playlist: shuffledPlaylist };
-    }
-
-    function onYouTubeIframeAPIReady() {
-      try {
-        initializePlayers();
-      } catch (e) {
-        console.error("Error initializing players:", e);
-      }
-    }
-
-    function initializePlayers() {
-      const { song, time, index, playlist } = getCurrentSongAndTime();
-
-      currentPlayer = new YT.Player('player', {
-        width: '100%',
-        height: '100%',
-        videoId: song.id,
-        playerVars: {
-          autoplay: 0,
-          controls: 1,
-          start: time,
-          rel: 0,
-          modestbranding: 1,
-          playsinline: 1
-        },
-        events: {
-          onReady: () => {
-            playersReady++;
-            if (playersReady === 2) {
-              document.body.addEventListener('click', startPlayback, { once: true });
-            }
-          },
-          onStateChange: (event) => {
-            if (event.data === YT.PlayerState.PLAYING) {
-              event.target.unMute();
-              monitorSongProgress(song, index, playlist);
-            }
-            if (event.data === YT.PlayerState.ENDED) {
-              switchToNextPlayer();
-            }
-          },
-          onError: (event) => {
-            console.error("Video error:", event.data);
-            setTimeout(switchToNextPlayer, 1000);
-          }
-        }
-      });
-
-      const nextPlayerDiv = document.createElement('div');
-      nextPlayerDiv.id = 'next-player';
-      nextPlayerDiv.style.display = 'none';
-      document.body.appendChild(nextPlayerDiv);
-
-      const nextSong = getNextSong(index, playlist);
-      nextPlayer = new YT.Player('next-player', {
-        width: '1',
-        height: '1',
-        videoId: nextSong.id,
-        playerVars: {
-          autoplay: 0,
-          mute: 1,
-          controls: 0,
-          start: 0,
-          rel: 0,
-          modestbranding: 1
-        },
-        events: {
-          onReady: onPlayerReady,
-          onError: (event) => {
-            console.error("Next video preload error:", event.data);
-          }
-        }
-      });
-    }
-
-    function startPlayback() {
-      currentPlayer.mute();
-      currentPlayer.playVideo();
-      setTimeout(() => currentPlayer.unMute(), 100);
-    }
-
-    function onPlayerReady() {
-      playersReady++;
-    }
-
-    function getNextSong(currentIndex, shuffledPlaylist) {
-      const nextIndex = (currentIndex + 1) % shuffledPlaylist.length;
-      return shuffledPlaylist[nextIndex];
-    }
-
-    function monitorSongProgress(song, index, playlist) {
-      const checkInterval = setInterval(() => {
-        if (currentPlayer && currentPlayer.getCurrentTime) {
-          const currentTime = currentPlayer.getCurrentTime();
-          const timeRemaining = song.duration - currentTime;
-          if (timeRemaining <= 10 && timeRemaining > 0) {
-            clearInterval(checkInterval);
-            switchToNextPlayer();
-          }
-        }
-      }, 2000);
-    }
-
-    function switchToNextPlayer() {
-      const tempPlayer = currentPlayer;
-      currentPlayer = nextPlayer;
-      nextPlayer = tempPlayer;
-
-      currentPlayer.a.id = 'player';
-      currentPlayer.a.style.width = '100%';
-      currentPlayer.a.style.height = '100%';
-      currentPlayer.a.style.display = 'block';
-
-      nextPlayer.a.id = 'next-player';
-      nextPlayer.a.style.width = '1px';
-      nextPlayer.a.style.height = '1px';
-      nextPlayer.a.style.display = 'none';
-
-      const { song, time, index, playlist } = getCurrentSongAndTime();
-
-      currentPlayer.loadVideoById({
-        videoId: song.id,
-        startSeconds: time
-      });
-      currentPlayer.mute();
-      currentPlayer.playVideo();
-
-      const nextSong = getNextSong(index, playlist);
-      nextPlayer.loadVideoById({
-        videoId: nextSong.id,
-        startSeconds: 0
-      });
-    }
-
-    setInterval(() => {
-      if (currentPlayer && currentPlayer.getCurrentTime) {
-        const { song, time, index, playlist } = getCurrentSongAndTime();
-        const currentSongId = currentPlayer.getVideoData().video_id;
-        if (currentSongId !== song.id) {
-          currentPlayer.loadVideoById({
-            videoId: song.id,
-            startSeconds: time
-          });
-          const nextSong = getNextSong(index, playlist);
-          nextPlayer.loadVideoById({
-            videoId: nextSong.id,
-            startSeconds: 0
-          });
-        } else {
-          const currentTime = Math.floor(currentPlayer.getCurrentTime());
-          if (Math.abs(currentTime - time) > 5) {
-            currentPlayer.seekTo(time, true);
-          }
+      let currentSong = null;
+      for (let i = 0; i < playlist.length; i++) {
+        accumulatedTime += playlist[i].duration;
+        if (playlistPosition < accumulatedTime) {
+          currentSong = playlist[i];
+          break;
         }
       }
-    }, 30000);
+
+      const songStartTime = accumulatedTime - currentSong.duration;
+      const positionInSong = playlistPosition - songStartTime;
+
+      console.log(`Syncing: ${currentSong.title} at ${positionInSong.toFixed(2)}s`);
+
+      if (currentSongUrl !== currentSong.url) {
+        player.src = currentSong.url;
+        currentSongUrl = currentSong.url;
+        console.log(`Loading new video: ${currentSong.url}`);
+      }
+      player.currentTime = positionInSong;
+    }
+
+    player.addEventListener('ended', () => {
+      console.log("Song Ended, Switching Track");
+      syncVideo();
+      player.play().catch(e => console.error("Playback failed:", e));
+    });
+
+    // Play button click handler
+    playButton.addEventListener('click', () => {
+      // Hide the play button
+      playButton.style.display = 'none';
+      // Show the video
+      player.style.display = 'block';
+      // Sync and start playback
+      syncVideo();
+      player.play().catch(e => console.error("Playback failed:", e));
+      // Enter fullscreen
+      enterFullScreen();
+    });
+
+    // Sync on page load (set correct song and position, but don't play)
+    syncVideo();
+    // Sync every 10 minutes (600,000 milliseconds)
+    setInterval(syncVideo, 600000);
   </script>
 </body>
 </html>
